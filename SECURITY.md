@@ -4,9 +4,11 @@
 
 Do not publish suspected vulnerabilities, exploit details, credentials, proof-of-concept payloads or sensitive logs in public GitHub issues, discussions or pull requests.
 
-Before this repository is made public, the maintainer must enable **GitHub Private Vulnerability Reporting** for `threelineage-verification` and verify that the private reporting workflow is reachable. The repository must not invite public issue reports for security-sensitive matters. If private reporting is not enabled, the project is not ready for public release.
+This repository is public. Use GitHub's **Private Vulnerability Reporting** feature if it is enabled for this repository. The maintainer has not verified its current availability or reachability in this document; do not assume that the private reporting workflow is enabled until it has been checked in the repository's Security settings.
 
-A dedicated security email address has not yet been designated. No address is implied by this policy; one must be explicitly configured and tested before it is advertised as a reporting route.
+A dedicated security email address has not been designated. No email reporting address is implied by this policy. Do not send sensitive material to an address guessed from commit metadata or maintainer identity.
+
+If no private reporting route is available, contact the maintainer through an established non-public channel to agree a safe reporting route before transmitting sensitive details. Do not put exploit details or secrets in a public issue.
 
 ## Coordinated disclosure
 
@@ -16,4 +18,4 @@ The maintainer will acknowledge receipt when practicable, assess impact, coordin
 
 ## Scope and limitations
 
-This is a pre-release verification package, not a certified security product. Reports should identify the affected version/commit, environment, reproduction steps, expected behaviour, actual behaviour, and relevant non-sensitive logs. Do not include live secrets or personal data.
+This is a developer verification package, not a certified security product. Publication does not constitute an independent audit, certification, or guarantee of universal protection. Reports should identify the affected version/commit, environment, reproduction steps, expected behaviour, actual behaviour, and relevant non-sensitive logs. Do not include live secrets or personal data.
