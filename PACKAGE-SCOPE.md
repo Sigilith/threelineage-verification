@@ -1,12 +1,14 @@
-# Package scope — ThreeLineage verification candidate RC2.2
+# Package scope — ThreeLineage Verification V1.0.0
+
+**Release status: PUBLICLY RELEASED.** This document defines the contents and exclusions of the published V1.0.0 verification package. It describes the verification subset only; it does not describe the complete integrated ThreeLineage deployment.
 
 ## Included
 
 - `core/auth_sidecar.py`: HMAC sidecar authentication for SQLite replay state.
 - `core/transaction_authorization.py`: SQLite-backed consumed-approval replay store.
 - `core/verifier_auth.py`: canonical authenticated verifier-state envelope and local generation marker.
-- `core/telemetry_verifier.py`: heartbeat replay verifier; all persistent nonce state is routed through `VerifierAuthManager`.
-- `tests/`: FIX1/FIX2 regression coverage, RC2.2 telemetry integration tests, and crash-boundary/paired-rollback demonstrations.
+- `core/telemetry_verifier.py`: heartbeat replay verifier; persistent nonce state is routed through `VerifierAuthManager`.
+- `tests/`: FIX1/FIX2 regression coverage, telemetry integration tests, and crash-boundary/paired-rollback demonstrations.
 - `harnesses/`: supplied ADV-003-A2 and ADV-003-B-R1A adversarial harnesses.
 - `evidence/`: original contradicted pre-integration ADV-003-B-R1A output and current release-gate logs.
 - Root governance and reproducibility files: architecture, threat model, evidence rules, security policy, licence, manifest and runner.
@@ -21,4 +23,8 @@ SQLite and its `.auth.json` sidecar are separate filesystem objects and cannot b
 
 The verifier `.lock` generation marker is adjacent to the authenticated state envelope on the same filesystem. It can detect missing, partial, or unanchored state changes when the marker remains intact. It cannot prevent an attacker with sufficient write access from restoring both files to a previously valid pair. Such full-host or paired-file rollback is out of scope without an external immutable anchor or hardware monotonic counter.
 
-This package does not claim atomicity across separate files, protection against privileged host compromise, independent certification, or universal security.
+This package does not claim atomicity across separate files, protection against privileged host compromise, independent certification, kernel-enforced isolation, or universal security.
+
+## Release interpretation
+
+V1.0.0 has been published. Any earlier RC2.2 candidate label or instruction not to publish is historical and superseded. The recorded developer checks are not independent replication, certification, or production assurance. See `docs/RELEASE_STATUS.md` for the release record, limitations and outstanding post-release assurance work.
