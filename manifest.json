@@ -1,0 +1,153 @@
+{
+  "files": [
+    {
+      "path": ".gitignore",
+      "sha256": "a23c604b14ebc2868e581d0e4cabfc983d274aaa6ecd088a3da4628b6b4100f0",
+      "size_bytes": 103
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "size_bytes": 11358
+    },
+    {
+      "path": "PACKAGE-SCOPE.md",
+      "sha256": "ab69983e8035837e913d67ae5d27f7e7db45aa37c0737c53edb5591ae10c5a0c",
+      "size_bytes": 2255
+    },
+    {
+      "path": "README.md",
+      "sha256": "f2b8d5292487309ee33ddd74af3c082a254f5eaad11e19090f114062e58f3d1d",
+      "size_bytes": 2354
+    },
+    {
+      "path": "SECURITY.md",
+      "sha256": "7b72f8fee9accded75057360d82586652d60a400b76c228105ffcc7c2aae7fb2",
+      "size_bytes": 1728
+    },
+    {
+      "path": "core/__init__.py",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "size_bytes": 1
+    },
+    {
+      "path": "core/auth_sidecar.py",
+      "sha256": "788dfd757f169043e8a608278f3c0ab87bf9a5babb28a603366c4c04d7e59d55",
+      "size_bytes": 4144
+    },
+    {
+      "path": "core/telemetry_verifier.py",
+      "sha256": "1166f95d11f22e32b5d1271d4601515853863dd82aabee2a2243c7e9349891c4",
+      "size_bytes": 8219
+    },
+    {
+      "path": "core/transaction_authorization.py",
+      "sha256": "ccc7a6c4d87f5c278e0f591f5c277e9422ea98435b2fc37de3686550e60a2968",
+      "size_bytes": 5005
+    },
+    {
+      "path": "core/verifier_auth.py",
+      "sha256": "9de1e347a3eb42cdf40f4ec3e9f36015d3549bf38990c238f7d35a9741d733c9",
+      "size_bytes": 7759
+    },
+    {
+      "path": "docs/ARCHITECTURE.md",
+      "sha256": "08688e95c84d0165761edbe797aecb696fce2f2ae61baf5ab067f74c1e73fa78",
+      "size_bytes": 1028
+    },
+    {
+      "path": "docs/EVIDENCE_RULES.md",
+      "sha256": "67db65553655047a6bbe45cc8e7b53ae7205c8600cbbfa13b3b4c05b5feaf84a",
+      "size_bytes": 948
+    },
+    {
+      "path": "docs/RC2.1_BASELINE.md",
+      "sha256": "bbae9d4e55054375067563f9f5cd19f845aa6e3186d38012a8bd106da2ac26c0",
+      "size_bytes": 678
+    },
+    {
+      "path": "docs/RELEASE_STATUS.md",
+      "sha256": "e752b17fd7a77c00efb60c09b9ac40307447245195055c95050e70eb8a12b60b",
+      "size_bytes": 3284
+    },
+    {
+      "path": "docs/THREAT_MODEL.md",
+      "sha256": "e7dd25e22c324f40d1c39a2b4b95ed010c6aafcd4901de8da2290b6f57cf110a",
+      "size_bytes": 3202
+    },
+    {
+      "path": "evidence/contradicted-baseline-ADV-003-B-R1A.log",
+      "sha256": "304dd6a193cf3312d735d079a1c9afa830c72a545a9f33b5e0676a54c227a4a8",
+      "size_bytes": 1269
+    },
+    {
+      "path": "evidence/rc22-pre-integration-release-gate.log",
+      "sha256": "c092aa0a256b9745cff8067fa45622ba03433069bf84c8a5e0d7bbe8a046703f",
+      "size_bytes": 2021
+    },
+    {
+      "path": "evidence/rc22-release-gate.log",
+      "sha256": "4abc8839ab17811e4acad8d63eb37e4d549b7c1b081cf5f33a82a39429001e1a",
+      "size_bytes": 2040
+    },
+    {
+      "path": "harnesses/ADV-003-A2.py",
+      "sha256": "19902942000bb3ca143c67a668dc5ed50380571e7d9192ed604708b8f4a918f5",
+      "size_bytes": 12873
+    },
+    {
+      "path": "harnesses/ADV-003-B-R1A.py",
+      "sha256": "f21e2c59af240e8e9aa3b1ac435eb1b9e270732186f0a194c056bf05f5df9f12",
+      "size_bytes": 12620
+    },
+    {
+      "path": "requirements.txt",
+      "sha256": "ceeace8d072b469f31ba1a26f2c40677f225d090f76fee996ffe0f7498023c15",
+      "size_bytes": 27
+    },
+    {
+      "path": "scripts/build_manifest.py",
+      "sha256": "376a7a02906d3de0d641ff54fb403452abe690d8314b72a338bc86411cac6545",
+      "size_bytes": 2438
+    },
+    {
+      "path": "scripts/run_release_gate.sh",
+      "sha256": "104f43ebb017e52b70dac4dfee05b17c85dd5a7bd60c71cd136bc7b119dc9304",
+      "size_bytes": 866
+    },
+    {
+      "path": "tests/conftest.py",
+      "sha256": "a625068b8adbea7bf4ab99d2c0dbb6a738497e65093995fc87e2b404e487037a",
+      "size_bytes": 364
+    },
+    {
+      "path": "tests/test_fix2_tl_find_002.py",
+      "sha256": "932b72ac7d533a44c5f8ef26c658173ba205548bef870ab79f4b577c88acab1a",
+      "size_bytes": 10239
+    },
+    {
+      "path": "tests/test_fix_tl_find_001.py",
+      "sha256": "8ccd75b3283f7f366e8386515130c1fc3762ba8241b2ea1237aa286b57c72baf",
+      "size_bytes": 8085
+    },
+    {
+      "path": "tests/test_rc22_crash_boundaries.py",
+      "sha256": "af29406938214df289807da98e78d799b084fb879a6c747f8d949103e42516b2",
+      "size_bytes": 2011
+    },
+    {
+      "path": "tests/test_rc22_secrets.py",
+      "sha256": "11f09d6a087bdcf4ca09a3b8ba4add1c35f4eec9cbb973dbc7f7d65b13812cde",
+      "size_bytes": 771
+    },
+    {
+      "path": "tests/test_telemetry_verifier_auth.py",
+      "sha256": "6431b5e17cdb24cfd204acc71ebae3b9250a0cc52944884ddbce97408e6979ef",
+      "size_bytes": 2193
+    }
+  ],
+  "frozen_rc2_1_handover_archive_sha256": "32a9c5f8746d9416ea9184f417b479d206f012e37d46b91b1bc6b2ca77708011",
+  "hash_algorithm": "SHA-256",
+  "manifest_format": 1,
+  "release": "ThreeLineage-RC2.2-candidate"
+}
