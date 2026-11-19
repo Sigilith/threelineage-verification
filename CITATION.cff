@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you cite this working paper or its verification artifacts, please use the metadata below."
+title: "Fail-Closed Runtime Governance and Cascade Containment Under Autonomous Swarm Exploitation: Developer Verification of Selected ThreeLineage Security Invariants"
+authors:
+  - family-names: "Nash"
+    given-names: "Ky"
+    affiliation: "ThreeLineage"
+version: "1.0.0"
+date-released: "2026-11-19"
+license: "CC-BY-4.0"
+repository-code: "https://github.com/Sigilith/threelineage-verification/releases/tag/V1.0.0"
+commit: "57963bd99051197c6c9cc2eb0c52ec425680142a"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.24379640"
+    description: "Zenodo Version DOI (v1.0.0)"
+  - type: doi
+    value: "10.5281/zenodo.24379639"
+    description: "Zenodo Concept DOI (all versions)"

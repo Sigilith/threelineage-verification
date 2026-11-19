@@ -1,0 +1,38 @@
+{
+  "title": "Fail-Closed Runtime Governance and Cascade Containment Under Autonomous Swarm Exploitation: Developer Verification of Selected ThreeLineage Security Invariants",
+  "upload_type": "publication",
+  "publication_type": "workingpaper",
+  "publication_date": "2026-11-19",
+  "creators": [
+    {
+      "name": "Nash, Ky",
+      "affiliation": "ThreeLineage"
+    }
+  ],
+  "description": "Developer-run empirical verification of selected security invariants in the ThreeLineage runtime-governance architecture (Sigilith structural boundary assessment, AXIOMOS policy and threshold/cascade enforcement, Guardian independent execution authority, and TraceGuard hash-chained provenance). Bound to release tag V1.0.0 (annotated tag-object SHA 4a48b016de3e09a6375333980e07212be9cc69d0; target commit SHA 57963bd99051197c6c9cc2eb0c52ec425680142a) with a 29-file SHA-256 manifest, 39/39 passing regression tests, adversarial persistence harnesses (ADV-003-A2, ADV-003-B-R1A), a 50,000-block benchmark run, and deterministic 100-node cascade simulations.",
+  "access_right": "open",
+  "license": "cc-by-4.0",
+  "keywords": [
+    "AI governance",
+    "fail-closed runtime",
+    "autonomous agent security",
+    "cryptographic audit trail",
+    "cascade containment",
+    "cyber-physical security",
+    "ThreeLineage",
+    "Sigilith",
+    "AXIOMOS",
+    "Guardian",
+    "TraceGuard"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/Sigilith/threelineage-verification/releases/tag/V1.0.0",
+      "relation": "isSupplementedBy",
+      "resource_type": "software",
+      "scheme": "url"
+    }
+  ],
+  "version": "1.0.0",
+  "language": "eng"
+}
