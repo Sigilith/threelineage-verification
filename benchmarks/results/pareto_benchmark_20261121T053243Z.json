@@ -1,0 +1,115 @@
+{
+  "timestamp_utc": "2026-11-21T05:30:39.528190+00:00",
+  "runs_per_regime": 10000,
+  "seed": 2026,
+  "profiles": {
+    "Single_Node": {
+      "Binary_V1": {
+        "A_Benign_Volatility": {
+          "safety_violations": 0,
+          "false_positive_trips": 10000,
+          "effective_availability_pct": 1.05,
+          "attenuated_steps": 0,
+          "escalations": 0,
+          "mean_intervention_delay_steps": null
+        },
+        "B_Slow_Drift": {
+          "safety_violations": 0,
+          "false_positive_trips": 0,
+          "effective_availability_pct": 100.0,
+          "attenuated_steps": 0,
+          "escalations": 0,
+          "mean_intervention_delay_steps": 4.53
+        },
+        "C_Adversarial_Drift": {
+          "safety_violations": 0,
+          "false_positive_trips": 0,
+          "effective_availability_pct": 100.0,
+          "attenuated_steps": 0,
+          "escalations": 0,
+          "mean_intervention_delay_steps": 0
+        }
+      },
+      "Elastic_V2": {
+        "A_Benign_Volatility": {
+          "safety_violations": 0,
+          "false_positive_trips": 0,
+          "effective_availability_pct": 52.28,
+          "attenuated_steps": 478249,
+          "escalations": 0,
+          "mean_intervention_delay_steps": null
+        },
+        "B_Slow_Drift": {
+          "safety_violations": 0,
+          "false_positive_trips": 0,
+          "effective_availability_pct": 100.0,
+          "attenuated_steps": 301706,
+          "escalations": 114464,
+          "mean_intervention_delay_steps": 3.01
+        },
+        "C_Adversarial_Drift": {
+          "safety_violations": 0,
+          "false_positive_trips": 0,
+          "effective_availability_pct": 100.0,
+          "attenuated_steps": 187245,
+          "escalations": 9237,
+          "mean_intervention_delay_steps": 0.66
+        }
+      }
+    },
+    "Coupled_100_Node_Grid": {
+      "Binary_V1": {
+        "A_Benign_Volatility": {
+          "safety_violations": 0,
+          "false_positive_trips": 10000,
+          "effective_availability_pct": 1.03,
+          "attenuated_steps": 0,
+          "escalations": 0,
+          "mean_intervention_delay_steps": null
+        },
+        "B_Slow_Drift": {
+          "safety_violations": 0,
+          "false_positive_trips": 0,
+          "effective_availability_pct": 100.0,
+          "attenuated_steps": 0,
+          "escalations": 0,
+          "mean_intervention_delay_steps": 4.07
+        },
+        "C_Adversarial_Drift": {
+          "safety_violations": 0,
+          "false_positive_trips": 0,
+          "effective_availability_pct": 100.0,
+          "attenuated_steps": 0,
+          "escalations": 0,
+          "mean_intervention_delay_steps": 0
+        }
+      },
+      "Elastic_V2": {
+        "A_Benign_Volatility": {
+          "safety_violations": 0,
+          "false_positive_trips": 0,
+          "effective_availability_pct": 66.23,
+          "attenuated_steps": 378135,
+          "escalations": 0,
+          "mean_intervention_delay_steps": null
+        },
+        "B_Slow_Drift": {
+          "safety_violations": 0,
+          "false_positive_trips": 0,
+          "effective_availability_pct": 100.0,
+          "attenuated_steps": 251103,
+          "escalations": 172181,
+          "mean_intervention_delay_steps": 2.67
+        },
+        "C_Adversarial_Drift": {
+          "safety_violations": 0,
+          "false_positive_trips": 0,
+          "effective_availability_pct": 100.0,
+          "attenuated_steps": 186776,
+          "escalations": 9403,
+          "mean_intervention_delay_steps": 0.66
+        }
+      }
+    }
+  }
+}
