@@ -1,17 +1,21 @@
 #!/usr/bin/env python3
 """
 ThreeLineage Safety-Availability Pareto Benchmark Harness (Stdlib Only).
+
 Evaluates Binary (V1.0.0) vs. Adaptive Elastic governance across Regimes A, B, and C,
-writing timestamped JSON results with a SHA-256 verification digest.
+writing timestamped JSON results with a verified SHA-256 sidecar digest.
 """
+
+from __future__ import annotations
+
 import argparse
+from collections.abc import Callable
 from datetime import datetime, timezone
 import hashlib
 import json
 from pathlib import Path
 import random
 import statistics
-from typing import Callable, Dict, List, Tuple
 
 from benchmarks.controllers.binary_v1 import binary_v1_controller
 from benchmarks.controllers.elastic_v2 import elastic_v2_controller
@@ -27,31 +31,38 @@ from benchmarks.regimes.single_node import (
 )
 from benchmarks.types import Decision, RunMetrics, StepInput, Verdict
 
-RegimeGen = Callable[[random.Random], Tuple[List[StepInput], int]]
-ControllerFn = Callable[[List[StepInput], StepInput], Decision]
+RegimeGen = Callable[[random.Random], tuple[list[StepInput], int]]
+ControllerFn = Callable[[list[StepInput], StepInput], Decision]
+
+ACTIVE_CLUSTER_SIZE = 15
+DIFFUSION_COEFF = 0.08
+REVERSION_COEFF = 0.12
+NOMINAL_NODE_LOAD = 0.45
+SAFETY_CLIFF = 1.0
 
 
-def _step_coupled_nodes(nodes: List[float], executed_delta: float, benign: bool) -> List[float]:
+def step_coupled_nodes(nodes: list[float], executed_delta: float, benign: bool) -> list[float]:
+    """Advance coupled ring topology by one simulation step."""
     n = len(nodes)
     updated = list(nodes)
-    # Apply actuation to active 15-node feeder cluster and diffuse across neighbors
     for i in range(n):
         left = nodes[(i - 1) % n]
         right = nodes[(i + 1) % n]
-        diffusion = 0.08 * (left + right - 2.0 * nodes[i])
-        injection = executed_delta if i < 15 else 0.0
-        reversion = -0.12 * (nodes[i] - 0.45) if benign else 0.0
+        diffusion = DIFFUSION_COEFF * (left + right - 2.0 * nodes[i])
+        injection = executed_delta if i < ACTIVE_CLUSTER_SIZE else 0.0
+        reversion = -REVERSION_COEFF * (nodes[i] - NOMINAL_NODE_LOAD) if benign else 0.0
         updated[i] = max(0.05, updated[i] + injection + diffusion + reversion)
     return updated
 
 
 def evaluate_suite(
     controller: ControllerFn,
-    regimes: Dict[str, RegimeGen],
+    regimes: dict[str, RegimeGen],
     n_runs: int = 1000,
     seed: int = 2026,
-) -> Dict[str, RunMetrics]:
-    results: Dict[str, RunMetrics] = {}
+) -> dict[str, RunMetrics]:
+    """Run deterministic Monte Carlo trials across each regime for a controller."""
+    results: dict[str, RunMetrics] = {}
 
     for name, gen_fn in regimes.items():
         rng = random.Random(seed)
@@ -59,12 +70,12 @@ def evaluate_suite(
 
         for _ in range(n_runs):
             seq, onset = gen_fn(rng)
-            history: List[StepInput] = []
+            history: list[StepInput] = []
             is_grid = len(seq[0].node_loads) > 0
             sim_nodes = list(seq[0].node_loads) if is_grid else []
             sim_load = max(sim_nodes) if is_grid else seq[0].coupled_load
             tripped = False
-            first_intervention = None
+            first_intervention: int | None = None
 
             for item in seq:
                 if tripped:
@@ -88,24 +99,27 @@ def evaluate_suite(
                 if dec.verdict != Verdict.PERMIT_FULL and first_intervention is None:
                     first_intervention = item.step
 
-                if dec.verdict == Verdict.PERMIT_ATTENUATED:
+                if dec.verdict == Verdict.PERMIT_FULL:
+                    metrics.permit_full_steps += 1
+                elif dec.verdict == Verdict.PERMIT_ATTENUATED:
                     metrics.attenuated_steps += 1
                 elif dec.verdict == Verdict.HOLD_ESCALATE:
                     metrics.escalations += 1
                 elif dec.verdict == Verdict.FAIL_CLOSED:
                     tripped = True
+                    metrics.fail_closed_trips += 1
                     if onset == -1:
                         metrics.false_positive_trips += 1
 
                 if is_grid:
-                    sim_nodes = _step_coupled_nodes(sim_nodes, dec.executed_delta, benign=(onset == -1))
+                    sim_nodes = step_coupled_nodes(sim_nodes, dec.executed_delta, benign=(onset == -1))
                     sim_load = max(sim_nodes)
                 else:
                     sim_load += dec.executed_delta
                     if onset == -1:
-                        sim_load -= 0.12 * (sim_load - 0.45)
+                        sim_load -= REVERSION_COEFF * (sim_load - NOMINAL_NODE_LOAD)
 
-                if sim_load >= 1.0 or (item.corrupt_state and dec.verdict != Verdict.FAIL_CLOSED):
+                if sim_load >= SAFETY_CLIFF or (item.corrupt_state and dec.verdict != Verdict.FAIL_CLOSED):
                     metrics.safety_violations += 1
                     break
 
@@ -118,12 +132,12 @@ def evaluate_suite(
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="ThreeLineage Safety-Availability Pareto Benchmark")
-    parser.add_argument("--runs", type=int, default=1000, help="Runs per regime (default: 1000)")
+    parser.add_argument("--runs", type=int, default=1000, help="Trials per regime (default: 1000)")
     parser.add_argument("--seed", type=int, default=2026, help="Deterministic PRNG seed")
     parser.add_argument("--profile", choices=["single", "grid", "both"], default="both")
     args = parser.parse_args()
 
-    profiles: Dict[str, Dict[str, RegimeGen]] = {}
+    profiles: dict[str, dict[str, RegimeGen]] = {}
     if args.profile in ("single", "both"):
         profiles["Single_Node"] = {
             "A_Benign_Volatility": gen_regime_a_benign,
@@ -137,44 +151,59 @@ def main() -> None:
             "C_Adversarial_Drift": gen_grid_regime_c_adversarial,
         }
 
-    controllers: Dict[str, ControllerFn] = {
+    controllers: dict[str, ControllerFn] = {
         "Binary_V1": binary_v1_controller,
         "Elastic_V2": elastic_v2_controller,
     }
 
-    report = {
+    report: dict[str, object] = {
+        "harness_version": "1.1.0",
         "timestamp_utc": datetime.now(timezone.utc).isoformat(),
         "runs_per_regime": args.runs,
         "seed": args.seed,
         "profiles": {},
     }
 
+    profiles_out: dict[str, dict[str, dict[str, object]]] = {}
     for prof_name, regimes in profiles.items():
         print(f"\n==================== {prof_name} (N={args.runs}) ====================")
-        report["profiles"][prof_name] = {}
+        profiles_out[prof_name] = {}
         for ctrl_name, ctrl_fn in controllers.items():
             print(f"\n--- {ctrl_name} ---")
             res = evaluate_suite(ctrl_fn, regimes, n_runs=args.runs, seed=args.seed)
-            report["profiles"][prof_name][ctrl_name] = {}
+            profiles_out[prof_name][ctrl_name] = {}
             for r_name, m in res.items():
-                mean_delay = round(statistics.mean(m.intervention_delays), 2) if m.intervention_delays else None
-                delay_str = f"{mean_delay:.1f} steps" if mean_delay is not None else "N/A"
+                avail = m.effective_availability
+                avail_pct = round(avail * 100, 2) if avail is not None else None
+                avail_str = f"{avail_pct:5.1f}%" if avail_pct is not None else "  N/A "
+
+                delays = m.intervention_delays
+                mean_d = round(statistics.mean(delays), 2) if delays else None
+                med_d = round(statistics.median(delays), 2) if delays else None
+                max_d = max(delays) if delays else None
+                delay_str = f"{mean_d:.1f} steps" if mean_d is not None else "N/A"
+
                 print(
                     f"{r_name:21s} | Viol: {m.safety_violations:4d} | "
-                    f"FP Trips: {m.false_positive_trips:4d} | "
-                    f"Eff.Avail: {m.effective_availability*100:5.1f}% | "
-                    f"Atten: {m.attenuated_steps:5d} | "
-                    f"Escal: {m.escalations:5d} | Delay: {delay_str}"
+                    f"FP Trips: {m.false_positive_trips:5d} | "
+                    f"Eff.Avail: {avail_str} | "
+                    f"Atten: {m.attenuated_steps:6d} | "
+                    f"Escal: {m.escalations:6d} | Delay: {delay_str}"
                 )
-                report["profiles"][prof_name][ctrl_name][r_name] = {
+                profiles_out[prof_name][ctrl_name][r_name] = {
                     "safety_violations": m.safety_violations,
                     "false_positive_trips": m.false_positive_trips,
-                    "effective_availability_pct": round(m.effective_availability * 100, 2),
+                    "effective_availability_pct": avail_pct,
+                    "permit_full_steps": m.permit_full_steps,
                     "attenuated_steps": m.attenuated_steps,
                     "escalations": m.escalations,
-                    "mean_intervention_delay_steps": mean_delay,
+                    "fail_closed_trips": m.fail_closed_trips,
+                    "mean_intervention_delay_steps": mean_d,
+                    "median_intervention_delay_steps": med_d,
+                    "max_intervention_delay_steps": max_d,
                 }
 
+    report["profiles"] = profiles_out
     out_dir = Path("benchmarks/results")
     out_dir.mkdir(parents=True, exist_ok=True)
     ts = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")

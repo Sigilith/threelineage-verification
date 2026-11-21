@@ -4,16 +4,14 @@
 - **Repository:** `threelineage-verification`
 - **Remote:** `https://github.com/Sigilith/threelineage-verification.git`
 - **Branch:** `feat/pareto-benchmark`
-- **Commit:** `9aa58133b31e7956cf1080cbc777985a4122dc28`
-- **Working Tree Status:** `?? benchmarks/REPRODUCIBILITY_CHECKLIST.md
-?? benchmarks/generate_bundle.py
-?? benchmarks/results/dependencies.txt`
+- **Commit:** `7d16410bba220905afabf2d6bc6b666a52e1a820`
+- **Working Tree Status:** `clean`
 
 ## 2. Benchmark Configuration
-- **Harness:** `benchmarks/pareto_harness.py` (v1.0)
+- **Harness:** `benchmarks/pareto_harness.py` (v1.0.0)
 - **Profiles:** `Single_Node`, `Coupled_100_Node_Grid`
 - **Regimes:** `A_Benign_Volatility`, `B_Slow_Drift`, `C_Adversarial_Drift`
-- **Trials per Regime:** `10,000` (`60,000` total trajectories)
+- **Trials per Regime:** `10,000`
 - **Random Seed:** `2026`
 - **Models Evaluated:** `Binary_V1`, `Elastic_V2`
 
@@ -34,9 +32,9 @@
 
 ## 5. Reproduction Command
 ```bash
-git clone https://github.com/Sigilith/threelineage-verification.git
+git clone [https://github.com/Sigilith/threelineage-verification.git](https://github.com/Sigilith/threelineage-verification.git)
 cd threelineage-verification
-git checkout 9aa58133b31e7956cf1080cbc777985a4122dc28
+git checkout 7d16410bba220905afabf2d6bc6b666a52e1a820
 python -m benchmarks.pareto_harness --runs 10000 --seed 2026 --profile both
 ```
 
