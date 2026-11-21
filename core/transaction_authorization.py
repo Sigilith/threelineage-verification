@@ -114,3 +114,64 @@ class SQLiteReplayStore:
 
             self.sidecar.commit(counter + 1, updated_nonces)
             return True
+
+    @staticmethod
+    def bind_envelope_digest(transaction_digest: str, alpha: float, permitted_delta: float, verdict: str) -> str:
+        """Bind a transaction digest to its Sigilith autonomy envelope parameters."""
+        import hashlib
+        import json
+
+        canonical = json.dumps(
+            {
+                "transaction_digest": transaction_digest,
+                "alpha": round(float(alpha), 6),
+                "permitted_delta": round(float(permitted_delta), 8),
+                "verdict": str(verdict),
+            },
+            sort_keys=True,
+            separators=(",", ":"),
+            allow_nan=False,
+        )
+        return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+    def consume_attenuated(
+        self,
+        key_id: str,
+        nonce: str,
+        transaction_digest: str,
+        envelope: Any,
+        ledger: Any = None,
+        action_id: str | None = None,
+        proposed_delta: float = 0.0,
+    ) -> tuple[bool, str]:
+        """
+        Enforce an AutonomyEnvelope via Guardian's single-use replay store and record
+        forensic telemetry in TraceGuard.
+
+        HOLD_ESCALATE and FAIL_CLOSED consume zero actuation permits and return (False, bound_digest).
+        """
+        bound_digest = self.bind_envelope_digest(
+            transaction_digest=transaction_digest,
+            alpha=envelope.alpha,
+            permitted_delta=envelope.permitted_delta,
+            verdict=envelope.verdict.value,
+        )
+        if envelope.verdict.value not in ("PERMIT_FULL", "PERMIT_ATTENUATED"):
+            if ledger is not None:
+                ledger.append(
+                    action_id=action_id or f"{key_id}:{nonce}",
+                    permit_digest=bound_digest,
+                    proposed_delta=proposed_delta,
+                    envelope=envelope,
+                )
+            return False, bound_digest
+
+        accepted = self.consume(key_id, nonce, bound_digest)
+        if accepted and ledger is not None:
+            ledger.append(
+                action_id=action_id or f"{key_id}:{nonce}",
+                permit_digest=bound_digest,
+                proposed_delta=proposed_delta,
+                envelope=envelope,
+            )
+        return accepted, bound_digest
