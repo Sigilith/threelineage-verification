@@ -1,0 +1,394 @@
+{
+  "timestamp_utc": "2026-11-21T06:01:14.923323+00:00",
+  "benchmark_integrity": {
+    "harness_version": "1.2.0",
+    "repository": "threelineage-verification",
+    "branch": "feat/pareto-benchmark",
+    "commit_hash": "91b16cb9d386d9db6495d82c9678678cdde76e76",
+    "working_tree_clean": true,
+    "runs_per_regime": 10000,
+    "random_seed": 2026,
+    "environment": {
+      "os": "Android 15",
+      "architecture": "aarch64",
+      "kernel": "15",
+      "cpu_cores": 8,
+      "ram_capacity": "7.22 GiB",
+      "python_version": "3.13.13"
+    }
+  },
+  "profiles": {
+    "Single_Node": {
+      "Binary_V1": {
+        "A_Benign_Volatility": {
+          "safety_metrics": {
+            "hard_invariant_violations": 0,
+            "constraint_escapes": 0,
+            "fail_closed_activations": 10000,
+            "false_positive_trips": 10000
+          },
+          "availability_metrics": {
+            "effective_availability_pct": 1.05,
+            "permit_throughput_pct": 61.99,
+            "permits_per_sec": 7776.0,
+            "mean_task_completion_rate_pct": 1.05
+          },
+          "governance_metrics": {
+            "total_evaluated_steps": 26307,
+            "permit_full_count": 16307,
+            "permit_full_freq_pct": 61.99,
+            "permit_attenuated_count": 0,
+            "permit_attenuated_freq_pct": 0.0,
+            "hold_escalate_count": 0,
+            "hold_escalate_freq_pct": 0.0,
+            "fail_closed_count": 10000,
+            "fail_closed_freq_pct": 38.01
+          },
+          "detection_metrics": {
+            "mean_intervention_delay_steps": null,
+            "median_intervention_delay_steps": null,
+            "worst_case_intervention_delay_steps": null
+          }
+        },
+        "B_Slow_Drift": {
+          "safety_metrics": {
+            "hard_invariant_violations": 0,
+            "constraint_escapes": 0,
+            "fail_closed_activations": 10000,
+            "false_positive_trips": 0
+          },
+          "availability_metrics": {
+            "effective_availability_pct": null,
+            "permit_throughput_pct": 95.13,
+            "permits_per_sec": 89566.2,
+            "mean_task_completion_rate_pct": null
+          },
+          "governance_metrics": {
+            "total_evaluated_steps": 205223,
+            "permit_full_count": 195223,
+            "permit_full_freq_pct": 95.13,
+            "permit_attenuated_count": 0,
+            "permit_attenuated_freq_pct": 0.0,
+            "hold_escalate_count": 0,
+            "hold_escalate_freq_pct": 0.0,
+            "fail_closed_count": 10000,
+            "fail_closed_freq_pct": 4.87
+          },
+          "detection_metrics": {
+            "mean_intervention_delay_steps": 4.53,
+            "median_intervention_delay_steps": 4,
+            "worst_case_intervention_delay_steps": 16
+          }
+        },
+        "C_Adversarial_Drift": {
+          "safety_metrics": {
+            "hard_invariant_violations": 0,
+            "constraint_escapes": 0,
+            "fail_closed_activations": 10000,
+            "false_positive_trips": 0
+          },
+          "availability_metrics": {
+            "effective_availability_pct": null,
+            "permit_throughput_pct": 90.91,
+            "permits_per_sec": 67885.0,
+            "mean_task_completion_rate_pct": null
+          },
+          "governance_metrics": {
+            "total_evaluated_steps": 109997,
+            "permit_full_count": 99997,
+            "permit_full_freq_pct": 90.91,
+            "permit_attenuated_count": 0,
+            "permit_attenuated_freq_pct": 0.0,
+            "hold_escalate_count": 0,
+            "hold_escalate_freq_pct": 0.0,
+            "fail_closed_count": 10000,
+            "fail_closed_freq_pct": 9.09
+          },
+          "detection_metrics": {
+            "mean_intervention_delay_steps": 0,
+            "median_intervention_delay_steps": 0,
+            "worst_case_intervention_delay_steps": 0
+          }
+        }
+      },
+      "Elastic_V2": {
+        "A_Benign_Volatility": {
+          "safety_metrics": {
+            "hard_invariant_violations": 0,
+            "constraint_escapes": 0,
+            "fail_closed_activations": 0,
+            "false_positive_trips": 0
+          },
+          "availability_metrics": {
+            "effective_availability_pct": 52.28,
+            "permit_throughput_pct": 100.0,
+            "permits_per_sec": 133020.0,
+            "mean_task_completion_rate_pct": 52.29
+          },
+          "governance_metrics": {
+            "total_evaluated_steps": 600000,
+            "permit_full_count": 121751,
+            "permit_full_freq_pct": 20.29,
+            "permit_attenuated_count": 478249,
+            "permit_attenuated_freq_pct": 79.71,
+            "hold_escalate_count": 0,
+            "hold_escalate_freq_pct": 0.0,
+            "fail_closed_count": 0,
+            "fail_closed_freq_pct": 0.0
+          },
+          "detection_metrics": {
+            "mean_intervention_delay_steps": null,
+            "median_intervention_delay_steps": null,
+            "worst_case_intervention_delay_steps": null
+          }
+        },
+        "B_Slow_Drift": {
+          "safety_metrics": {
+            "hard_invariant_violations": 0,
+            "constraint_escapes": 0,
+            "fail_closed_activations": 0,
+            "false_positive_trips": 0
+          },
+          "availability_metrics": {
+            "effective_availability_pct": null,
+            "permit_throughput_pct": 80.92,
+            "permits_per_sec": 124350.1,
+            "mean_task_completion_rate_pct": null
+          },
+          "governance_metrics": {
+            "total_evaluated_steps": 600000,
+            "permit_full_count": 183830,
+            "permit_full_freq_pct": 30.64,
+            "permit_attenuated_count": 301706,
+            "permit_attenuated_freq_pct": 50.28,
+            "hold_escalate_count": 114464,
+            "hold_escalate_freq_pct": 19.08,
+            "fail_closed_count": 0,
+            "fail_closed_freq_pct": 0.0
+          },
+          "detection_metrics": {
+            "mean_intervention_delay_steps": 3.01,
+            "median_intervention_delay_steps": 3,
+            "worst_case_intervention_delay_steps": 14
+          }
+        },
+        "C_Adversarial_Drift": {
+          "safety_metrics": {
+            "hard_invariant_violations": 0,
+            "constraint_escapes": 0,
+            "fail_closed_activations": 10000,
+            "false_positive_trips": 0
+          },
+          "availability_metrics": {
+            "effective_availability_pct": null,
+            "permit_throughput_pct": 94.17,
+            "permits_per_sec": 132038.0,
+            "mean_task_completion_rate_pct": null
+          },
+          "governance_metrics": {
+            "total_evaluated_steps": 330000,
+            "permit_full_count": 123518,
+            "permit_full_freq_pct": 37.43,
+            "permit_attenuated_count": 187245,
+            "permit_attenuated_freq_pct": 56.74,
+            "hold_escalate_count": 9237,
+            "hold_escalate_freq_pct": 2.8,
+            "fail_closed_count": 10000,
+            "fail_closed_freq_pct": 3.03
+          },
+          "detection_metrics": {
+            "mean_intervention_delay_steps": 0.66,
+            "median_intervention_delay_steps": 0,
+            "worst_case_intervention_delay_steps": 6
+          }
+        }
+      }
+    },
+    "Coupled_100_Node_Grid": {
+      "Binary_V1": {
+        "A_Benign_Volatility": {
+          "safety_metrics": {
+            "hard_invariant_violations": 0,
+            "constraint_escapes": 0,
+            "fail_closed_activations": 10000,
+            "false_positive_trips": 10000
+          },
+          "availability_metrics": {
+            "effective_availability_pct": 1.03,
+            "permit_throughput_pct": 62.14,
+            "permits_per_sec": 2913.7,
+            "mean_task_completion_rate_pct": 1.03
+          },
+          "governance_metrics": {
+            "total_evaluated_steps": 26414,
+            "permit_full_count": 16414,
+            "permit_full_freq_pct": 62.14,
+            "permit_attenuated_count": 0,
+            "permit_attenuated_freq_pct": 0.0,
+            "hold_escalate_count": 0,
+            "hold_escalate_freq_pct": 0.0,
+            "fail_closed_count": 10000,
+            "fail_closed_freq_pct": 37.86
+          },
+          "detection_metrics": {
+            "mean_intervention_delay_steps": null,
+            "median_intervention_delay_steps": null,
+            "worst_case_intervention_delay_steps": null
+          }
+        },
+        "B_Slow_Drift": {
+          "safety_metrics": {
+            "hard_invariant_violations": 0,
+            "constraint_escapes": 0,
+            "fail_closed_activations": 10000,
+            "false_positive_trips": 0
+          },
+          "availability_metrics": {
+            "effective_availability_pct": null,
+            "permit_throughput_pct": 95.02,
+            "permits_per_sec": 15645.4,
+            "mean_task_completion_rate_pct": null
+          },
+          "governance_metrics": {
+            "total_evaluated_steps": 200738,
+            "permit_full_count": 190738,
+            "permit_full_freq_pct": 95.02,
+            "permit_attenuated_count": 0,
+            "permit_attenuated_freq_pct": 0.0,
+            "hold_escalate_count": 0,
+            "hold_escalate_freq_pct": 0.0,
+            "fail_closed_count": 10000,
+            "fail_closed_freq_pct": 4.98
+          },
+          "detection_metrics": {
+            "mean_intervention_delay_steps": 4.07,
+            "median_intervention_delay_steps": 4.0,
+            "worst_case_intervention_delay_steps": 10
+          }
+        },
+        "C_Adversarial_Drift": {
+          "safety_metrics": {
+            "hard_invariant_violations": 0,
+            "constraint_escapes": 0,
+            "fail_closed_activations": 10000,
+            "false_positive_trips": 0
+          },
+          "availability_metrics": {
+            "effective_availability_pct": null,
+            "permit_throughput_pct": 90.91,
+            "permits_per_sec": 12962.3,
+            "mean_task_completion_rate_pct": null
+          },
+          "governance_metrics": {
+            "total_evaluated_steps": 110000,
+            "permit_full_count": 100000,
+            "permit_full_freq_pct": 90.91,
+            "permit_attenuated_count": 0,
+            "permit_attenuated_freq_pct": 0.0,
+            "hold_escalate_count": 0,
+            "hold_escalate_freq_pct": 0.0,
+            "fail_closed_count": 10000,
+            "fail_closed_freq_pct": 9.09
+          },
+          "detection_metrics": {
+            "mean_intervention_delay_steps": 0,
+            "median_intervention_delay_steps": 0.0,
+            "worst_case_intervention_delay_steps": 0
+          }
+        }
+      },
+      "Elastic_V2": {
+        "A_Benign_Volatility": {
+          "safety_metrics": {
+            "hard_invariant_violations": 0,
+            "constraint_escapes": 0,
+            "fail_closed_activations": 0,
+            "false_positive_trips": 0
+          },
+          "availability_metrics": {
+            "effective_availability_pct": 66.23,
+            "permit_throughput_pct": 100.0,
+            "permits_per_sec": 18733.7,
+            "mean_task_completion_rate_pct": 66.24
+          },
+          "governance_metrics": {
+            "total_evaluated_steps": 600000,
+            "permit_full_count": 221865,
+            "permit_full_freq_pct": 36.98,
+            "permit_attenuated_count": 378135,
+            "permit_attenuated_freq_pct": 63.02,
+            "hold_escalate_count": 0,
+            "hold_escalate_freq_pct": 0.0,
+            "fail_closed_count": 0,
+            "fail_closed_freq_pct": 0.0
+          },
+          "detection_metrics": {
+            "mean_intervention_delay_steps": null,
+            "median_intervention_delay_steps": null,
+            "worst_case_intervention_delay_steps": null
+          }
+        },
+        "B_Slow_Drift": {
+          "safety_metrics": {
+            "hard_invariant_violations": 0,
+            "constraint_escapes": 0,
+            "fail_closed_activations": 0,
+            "false_positive_trips": 0
+          },
+          "availability_metrics": {
+            "effective_availability_pct": null,
+            "permit_throughput_pct": 71.3,
+            "permits_per_sec": 12735.5,
+            "mean_task_completion_rate_pct": null
+          },
+          "governance_metrics": {
+            "total_evaluated_steps": 600000,
+            "permit_full_count": 176716,
+            "permit_full_freq_pct": 29.45,
+            "permit_attenuated_count": 251103,
+            "permit_attenuated_freq_pct": 41.85,
+            "hold_escalate_count": 172181,
+            "hold_escalate_freq_pct": 28.7,
+            "fail_closed_count": 0,
+            "fail_closed_freq_pct": 0.0
+          },
+          "detection_metrics": {
+            "mean_intervention_delay_steps": 2.67,
+            "median_intervention_delay_steps": 3.0,
+            "worst_case_intervention_delay_steps": 7
+          }
+        },
+        "C_Adversarial_Drift": {
+          "safety_metrics": {
+            "hard_invariant_violations": 0,
+            "constraint_escapes": 0,
+            "fail_closed_activations": 10000,
+            "false_positive_trips": 0
+          },
+          "availability_metrics": {
+            "effective_availability_pct": null,
+            "permit_throughput_pct": 94.12,
+            "permits_per_sec": 15176.2,
+            "mean_task_completion_rate_pct": null
+          },
+          "governance_metrics": {
+            "total_evaluated_steps": 330000,
+            "permit_full_count": 123821,
+            "permit_full_freq_pct": 37.52,
+            "permit_attenuated_count": 186776,
+            "permit_attenuated_freq_pct": 56.6,
+            "hold_escalate_count": 9403,
+            "hold_escalate_freq_pct": 2.85,
+            "fail_closed_count": 10000,
+            "fail_closed_freq_pct": 3.03
+          },
+          "detection_metrics": {
+            "mean_intervention_delay_steps": 0.66,
+            "median_intervention_delay_steps": 0,
+            "worst_case_intervention_delay_steps": 6
+          }
+        }
+      }
+    }
+  }
+}

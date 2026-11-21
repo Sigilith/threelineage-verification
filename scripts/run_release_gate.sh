@@ -12,14 +12,24 @@ python -m pytest -p no:cacheprovider -q
 
 TMP_A="$(mktemp -d)"
 TMP_B="$(mktemp -d)"
-trap 'rm -rf "$TMP_A" "$TMP_B"' EXIT
+TMP_C="$(mktemp -d)"
+trap 'rm -rf "$TMP_A" "$TMP_B" "$TMP_C"' EXIT
+
 (
   cd "$TMP_A"
   python "$ROOT/harnesses/ADV-003-A2.py"
 )
+
 B_OUTPUT="$(cd "$TMP_B" && python "$ROOT/harnesses/ADV-003-B-R1A.py" 2>&1)"
 printf '%s\n' "$B_OUTPUT"
 if ! grep -q 'VERDICT: PASS' <<<"$B_OUTPUT"; then
   echo 'RELEASE BLOCKED: ADV-003-B-R1A did not produce VERDICT: PASS.' >&2
+  exit 1
+fi
+
+C_OUTPUT="$(cd "$TMP_C" && python "$ROOT/harnesses/ADV-004-ELASTIC-PIPELINE.py" 2>&1)"
+printf '%s\n' "$C_OUTPUT"
+if ! grep -q 'VERDICT: PASS' <<<"$C_OUTPUT"; then
+  echo 'RELEASE BLOCKED: ADV-004-ELASTIC-PIPELINE did not produce VERDICT: PASS.' >&2
   exit 1
 fi
