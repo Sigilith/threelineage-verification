@@ -114,3 +114,30 @@ For the detailed release record and outstanding assurance boundaries, see "docs/
 
 ThreeLineage Verification — V1.0.0
 Public release | Reproducible developer verification | Documented assurance boundaries
+
+8. Independent replication register — snapshot f5c7f94
+
+The current independent-evaluation reference snapshot is pinned to:
+
+`f5c7f94176f5b852d1a64af19b67e2f2462bfb98`
+
+This snapshot is later than the V1.0.0 release record above. It includes the subsequent verification work on `main`; it does not rewrite the historical V1.0.0 results.
+
+Evaluator participation is tracked through one GitHub issue per evaluator or independent evaluation team. Register using the [Independent Replication Registration issue template](https://github.com/Sigilith/threelineage-verification/issues/new?template=replication-registration.md).
+
+Live participation counts (open registration issues, grouped by the current issue-title status):
+
+| Stage | Live count |
+|---|---|
+| Registered | ![Registered](https://img.shields.io/github/issues-search/Sigilith/threelineage-verification?query=is%3Aissue%20is%3Aopen%20in%3Atitle%20%22%5BReplication%3A%20Registered%5D%22&label=registered) |
+| Testing started | ![Testing](https://img.shields.io/github/issues-search/Sigilith/threelineage-verification?query=is%3Aissue%20is%3Aopen%20in%3Atitle%20%22%5BReplication%3A%20Testing%5D%22&label=testing) |
+| Report submitted | ![Reports](https://img.shields.io/github/issues-search/Sigilith/threelineage-verification?query=is%3Aissue%20is%3Aopen%20in%3Atitle%20%22%5BReplication%3A%20Report%20submitted%5D%22&label=reports) |
+| Independently reproduced | ![Reproduced](https://img.shields.io/github/issues-search/Sigilith/threelineage-verification?query=is%3Aissue%20is%3Aopen%20in%3Atitle%20%22%5BReplication%3A%20Independently%20reproduced%5D%22&label=independently%20reproduced) |
+
+To keep the counts meaningful, maintain one issue per evaluator/team and update its title only when that stage is genuinely reached. Registration is not a test result; a submitted report is not necessarily a pass. The independently reproduced count should only be used when a report documents successful reproduction of the pinned snapshot. Closed issues are not included in these live counts.
+
+The registration record is voluntary and public. Evaluators should not post private contact details, credentials, keys, customer data, or confidential environment information. A pseudonym is acceptable.
+
+The register measures participation and reported software replication only. It is not a download counter and does not establish hardware-backed trust, live OT/ICS capability, safety certification, regulatory approval, or general security certification.
+
+The pinned evaluator archive and checksum sidecar are distributed from the release handoff location. Before use, evaluators must verify the checksum and follow [the external replication handoff guide](docs/EXTERNAL_REPLICATION_HANDOFF.md).
