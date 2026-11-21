@@ -251,6 +251,56 @@
       "size_bytes": 6886
     },
     {
+      "path": "replication/README.md",
+      "sha256": "59b5a96d870f09bbff2e6d416bed5a08a153955d610885687741d909c73d87fa",
+      "size_bytes": 1328
+    },
+    {
+      "path": "replication/benchmark/expected_results.json",
+      "sha256": "815eb5d2143f36ae60dd0e90b48998052ba6cb2866a68f5188fc0000de1d13c9",
+      "size_bytes": 385
+    },
+    {
+      "path": "replication/benchmark/run_v1_2_0.py",
+      "sha256": "22f12a04ec340d332ab21a3d82fdbdb88b9fce774fe3f7ea55672bc19e857cd2",
+      "size_bytes": 5938
+    },
+    {
+      "path": "replication/environment/requirements.txt",
+      "sha256": "43a510f9edd343c62ca589047ce2fb0737d37a4fb82135020a25cf0587f00d6c",
+      "size_bytes": 35
+    },
+    {
+      "path": "replication/environment/setup.sh",
+      "sha256": "fdf352badb50baf618f199effabd2b37181f1f42a28f43dcff582c3e97487ce3",
+      "size_bytes": 333
+    },
+    {
+      "path": "replication/evidence/expected_checks.json",
+      "sha256": "a2b11d63ce6da65db247893435dd42e33c76745552882f1b88f1651f06dfbc91",
+      "size_bytes": 372
+    },
+    {
+      "path": "replication/evidence/result_schema.json",
+      "sha256": "b0d4f323abadf7cb8274b3330c1960b2938cbd413817c130bb98365f3c494a7b",
+      "size_bytes": 305
+    },
+    {
+      "path": "replication/release_gate/run_replication.sh",
+      "sha256": "9e5f870c3b92c90b5c6d385c8668328b89dae49fe2cbbd610cb9745c009d2fdc",
+      "size_bytes": 4002
+    },
+    {
+      "path": "replication/release_gate/verify_manifest.py",
+      "sha256": "b2dc15cfa911b085cb5a91f9796c9ce0f09806a74763fd0607d6b6b62ec85ade",
+      "size_bytes": 2779
+    },
+    {
+      "path": "replication/reports/TEMPLATE.md",
+      "sha256": "1f0308a8a97ef2d0f144dcfc4c836e8be4848fca1b8da551fe8301ad949c1795",
+      "size_bytes": 1328
+    },
+    {
       "path": "requirements.txt",
       "sha256": "ceeace8d072b469f31ba1a26f2c40677f225d090f76fee996ffe0f7498023c15",
       "size_bytes": 27
