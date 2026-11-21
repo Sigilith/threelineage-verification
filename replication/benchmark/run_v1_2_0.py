@@ -87,7 +87,9 @@ def main() -> int:
             try:
                 obj = json.loads(candidate.read_text(encoding="utf-8"))
                 integ = obj.get("benchmark_integrity", {}) if isinstance(obj, dict) else {}
-                if integ.get("seed") == args.seed and integ.get("runs_per_regime") == args.runs:
+                seed_ok = (integ.get("random_seed") == args.seed or integ.get("seed") == args.seed)
+                runs_ok = (integ.get("runs_per_regime") == args.runs or integ.get("runs") == args.runs)
+                if seed_ok and runs_ok:
                     parsed_data = obj
                     break
             except Exception:
