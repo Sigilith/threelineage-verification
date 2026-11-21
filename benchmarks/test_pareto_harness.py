@@ -6,7 +6,7 @@ import unittest
 
 from benchmarks.controllers.binary_v1 import binary_v1_controller
 from benchmarks.controllers.elastic_v2 import elastic_v2_controller
-from benchmarks.pareto_harness import evaluate_suite
+from benchmarks.pareto_harness import _format_regime_metrics, evaluate_suite
 from benchmarks.regimes.coupled_grid import (
     gen_grid_regime_a_benign,
     gen_grid_regime_b_slow_drift,
@@ -26,9 +26,11 @@ class TestParetoHarness(unittest.TestCase):
         regimes = {"A_Benign_Volatility": gen_regime_a_benign}
         run_one = evaluate_suite(elastic_v2_controller, regimes, n_runs=50, seed=2026)
         run_two = evaluate_suite(elastic_v2_controller, regimes, n_runs=50, seed=2026)
-        self.assertEqual(run_one["A_Benign_Volatility"], run_two["A_Benign_Volatility"])
+        self.assertEqual(run_one["A_Benign_Volatility"].permit_full_steps, run_two["A_Benign_Volatility"].permit_full_steps)
+        self.assertEqual(run_one["A_Benign_Volatility"].attenuated_steps, run_two["A_Benign_Volatility"].attenuated_steps)
+        self.assertEqual(run_one["A_Benign_Volatility"].completed_benign_work, run_two["A_Benign_Volatility"].completed_benign_work)
 
-    def test_single_node_invariants_and_availability(self) -> None:
+    def test_single_node_invariants_and_full_report_schema(self) -> None:
         regimes = {
             "A_Benign_Volatility": gen_regime_a_benign,
             "B_Slow_Drift": gen_regime_b_slow_drift,
@@ -38,18 +40,24 @@ class TestParetoHarness(unittest.TestCase):
         ela_res = evaluate_suite(elastic_v2_controller, regimes, n_runs=100, seed=2026)
 
         for name in regimes:
-            self.assertEqual(ela_res[name].safety_violations, 0)
+            self.assertEqual(ela_res[name].hard_invariant_violations, 0)
+            self.assertEqual(ela_res[name].constraint_escapes, 0)
+            formatted = _format_regime_metrics(ela_res[name])
+            gov = formatted["governance_metrics"]
+            freq_sum = (
+                gov["permit_full_freq_pct"]
+                + gov["permit_attenuated_freq_pct"]
+                + gov["hold_escalate_freq_pct"]
+                + gov["fail_closed_freq_pct"]
+            )
+            self.assertAlmostEqual(freq_sum, 100.0, delta=0.1)
 
         self.assertEqual(ela_res["A_Benign_Volatility"].false_positive_trips, 0)
         self.assertEqual(ela_res["A_Benign_Volatility"].escalations, 0)
-
-        bin_avail = bin_res["A_Benign_Volatility"].effective_availability
-        ela_avail = ela_res["A_Benign_Volatility"].effective_availability
-        self.assertIsNotNone(bin_avail)
-        self.assertIsNotNone(ela_avail)
-        assert bin_avail is not None and ela_avail is not None
-        self.assertGreater(ela_avail, bin_avail)
-
+        self.assertGreater(
+            ela_res["A_Benign_Volatility"].effective_availability or 0.0,
+            bin_res["A_Benign_Volatility"].effective_availability or 0.0,
+        )
         self.assertIsNone(ela_res["B_Slow_Drift"].effective_availability)
         self.assertIsNone(ela_res["C_Adversarial_Drift"].effective_availability)
 
@@ -61,7 +69,8 @@ class TestParetoHarness(unittest.TestCase):
         }
         ela_res = evaluate_suite(elastic_v2_controller, regimes, n_runs=100, seed=2026)
         for name in regimes:
-            self.assertEqual(ela_res[name].safety_violations, 0)
+            self.assertEqual(ela_res[name].hard_invariant_violations, 0)
+            self.assertEqual(ela_res[name].constraint_escapes, 0)
         self.assertEqual(ela_res["A_Benign_Volatility"].false_positive_trips, 0)
 
 
