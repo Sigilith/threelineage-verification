@@ -182,8 +182,8 @@
     },
     {
       "path": "docs/ARCHITECTURE.md",
-      "sha256": "08688e95c84d0165761edbe797aecb696fce2f2ae61baf5ab067f74c1e73fa78",
-      "size_bytes": 1028
+      "sha256": "677fc8eb1ca48c5e571bcc22f4a1857aff7a3fe97cb5f748453fb132c995ff93",
+      "size_bytes": 1945
     },
     {
       "path": "docs/EVIDENCE_RULES.md",
@@ -231,6 +231,11 @@
       "size_bytes": 12620
     },
     {
+      "path": "harnesses/ADV-004-ELASTIC-PIPELINE.py",
+      "sha256": "3e5cd62c9cda0fda1b8ce336b9b1f255c8c8bceb24b632a2579b0c05b987bdbb",
+      "size_bytes": 5772
+    },
+    {
       "path": "requirements.txt",
       "sha256": "ceeace8d072b469f31ba1a26f2c40677f225d090f76fee996ffe0f7498023c15",
       "size_bytes": 27
@@ -242,8 +247,8 @@
     },
     {
       "path": "scripts/run_release_gate.sh",
-      "sha256": "104f43ebb017e52b70dac4dfee05b17c85dd5a7bd60c71cd136bc7b119dc9304",
-      "size_bytes": 866
+      "sha256": "afd44ae87296a52c8f6e56e6b8fa1922210e74e6cf9d54a1920b9386b9ea2172",
+      "size_bytes": 1160
     },
     {
       "path": "tests/conftest.py",
