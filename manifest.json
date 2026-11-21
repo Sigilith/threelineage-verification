@@ -166,6 +166,11 @@
       "size_bytes": 4144
     },
     {
+      "path": "core/hardware_trust.py",
+      "sha256": "bf536451aab441cc5ba14ea9c1dd7796c340325616500d5e46f6f8bb654345f1",
+      "size_bytes": 6135
+    },
+    {
       "path": "core/identity.py",
       "sha256": "a16de373b4729ce8b1138be3d79bf461157fdf10c5bdfbb48630e39a999c12e4",
       "size_bytes": 8406
@@ -204,6 +209,11 @@
       "path": "docs/EVIDENCE_RULES.md",
       "sha256": "67db65553655047a6bbe45cc8e7b53ae7205c8600cbbfa13b3b4c05b5feaf84a",
       "size_bytes": 948
+    },
+    {
+      "path": "docs/EXTERNAL_REPLICATION_HANDOFF.md",
+      "sha256": "a33afaaab6813ea09cac6f12fad36445f273342bd406a6407e7a5b74998aa4e1",
+      "size_bytes": 1718
     },
     {
       "path": "docs/RC2.1_BASELINE.md",
@@ -346,9 +356,19 @@
       "size_bytes": 8085
     },
     {
+      "path": "tests/test_hardware_trust_interfaces.py",
+      "sha256": "232329df473c77f334f1e8a2318ca14fab4861e5c4399b98667cd3474d01fa01",
+      "size_bytes": 1814
+    },
+    {
       "path": "tests/test_ot_boundary_scaffold.py",
       "sha256": "cda9d386646938cfe76202c88c569c5b532e64e29eba85b1d94d1c6a01efa675",
       "size_bytes": 1567
+    },
+    {
+      "path": "tests/test_ot_protocol_fixtures.py",
+      "sha256": "b26cf04887f53c00d106b4653b79a7dd29e8533c7434f1f3e4245d0c72a21f8d",
+      "size_bytes": 2486
     },
     {
       "path": "tests/test_rc22_crash_boundaries.py",
