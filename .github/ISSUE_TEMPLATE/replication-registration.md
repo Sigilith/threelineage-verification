@@ -1,50 +1,40 @@
 ---
-name: Independent replication registration
-about: Register an independent attempt to reproduce the published f5c7f94 verification snapshot
+name: Register a replication
+about: Register an independent evaluation of the f5c7f94 verification snapshot
 title: "[Replication: Registered] "
 assignees: ""
 ---
 
-## Independent replication registration
+## Independent replication
 
-Use one issue per evaluator or independent evaluation team. This issue is a participation record, not evidence that replication has succeeded.
+Use this form if you intend to run the published verification package independently. Please open one registration per evaluator or team.
 
-### Snapshot
-
-- Source repository: `Sigilith/threelineage-verification`
-- Required source commit: `f5c7f94176f5b852d1a64af19b67e2f2462bfb98`
-- Archive: `threelineage-verification-main-f5c7f94.tar.gz`
+**Evaluation target:** [f5c7f94](https://github.com/Sigilith/threelineage-verification/tree/f5c7f94176f5b852d1a64af19b67e2f2462bfb98)  
+**Archive:** `threelineage-verification-main-f5c7f94.tar.gz)
 
 ### Evaluator
 
-- Evaluator name or organisation (a pseudonym is acceptable):
-- Public contact or profile (optional):
-- Country/region (optional):
+Name or organisation (optional):  
+Website or public profile (optional):  
+Location (optional):
 
-Do not post private contact details, credentials, keys, customer data, or confidential environment information.
+A name or organisation is not required. Please don't include private contact details or confidential information.
 
-### Independence and intent
+### Test environment
 
-- [ ] I am registering an independent attempt and will record results from my own environment.
-- [ ] I will verify the archive checksum before extraction.
-- [ ] I will not modify expected results or alter observed outputs.
-- [ ] I understand that registration and download do not constitute successful replication.
+Complete this when known; it is fine to leave it blank for now.
 
-### Planned environment (optional at registration)
+Operating system:  
+Architecture:  
+Python version:  
+Expected start date:
 
-- Operating system:
-- Architecture:
-- Python version:
-- Planned start date:
+### Notes
 
-### Results
+Anything you'd like to say about your planned evaluation, areas of interest or intended approach:
 
-Leave this section unchanged until testing has actually been performed. When testing begins, edit the issue title to `[Replication: Testing] ...`. When a report is submitted, use `[Replication: Report submitted] ...`. Only use `[Replication: Independently reproduced] ...` after the evaluator has documented a successful reproduction against the pinned snapshot.
+---
 
-- Observed outcome: Not yet tested
-- Report link: Not yet submitted
-- Deviations or failures: Not yet assessed
+Once you begin, update the issue title to **[Replication: Testing]**. When you publish your findings, change it to **[Replication: Report submitted]**. The **[Replication: Independently reproduced]** status is reserved for a report showing that the pinned package ran successfully in an independent environment.
 
-### Scope acknowledgement
-
-This register tracks evaluator participation and reported outcomes for the software verification snapshot only. It does not imply hardware-backed trust integration, live OT/ICS integration, safety certification, regulatory approval, or general security certification.
+The register records evaluation of this software snapshot. It is not a claim of live OT/ICS integration, hardware-backed trust, safety certification or regulatory approval. Please report failures and deviations as observed; they are useful results too.
