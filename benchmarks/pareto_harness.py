@@ -179,9 +179,9 @@ def main() -> None:
     out_dir.mkdir(parents=True, exist_ok=True)
     ts = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     out_file = out_dir / f"pareto_benchmark_{ts}.json"
-    payload = json.dumps(report, indent=2)
+    payload = json.dumps(report, indent=2) + "\n"
     digest = hashlib.sha256(payload.encode("utf-8")).hexdigest()
-    out_file.write_text(payload + "\n", encoding="utf-8")
+    out_file.write_text(payload, encoding="utf-8")
     (out_dir / f"pareto_benchmark_{ts}.sha256").write_text(f"{digest}  {out_file.name}\n", encoding="utf-8")
     print(f"\nSaved artifact: {out_file}")
     print(f"SHA-256:        {digest}")
