@@ -1,0 +1,17 @@
+{
+  "required_checks": [
+    "manifest_integrity",
+    "release_gate_script",
+    "unittest_suite",
+    "adv_003_a2",
+    "adv_003_b_r1a",
+    "adv_004_elastic_pipeline",
+    "adv_005_delegation_chain"
+  ],
+  "expected_verdicts": {
+    "adv_003_a2": "PASS",
+    "adv_003_b_r1a": "PASS",
+    "adv_004_elastic_pipeline": "PASS",
+    "adv_005_delegation_chain": "PASS"
+  }
+}

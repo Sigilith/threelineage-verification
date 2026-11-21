@@ -116,8 +116,14 @@ class SQLiteReplayStore:
             return True
 
     @staticmethod
-    def bind_envelope_digest(transaction_digest: str, alpha: float, permitted_delta: float, verdict: str) -> str:
-        """Bind a transaction digest to its Sigilith autonomy envelope parameters."""
+    def bind_envelope_digest(
+        transaction_digest: str,
+        alpha: float,
+        permitted_delta: float,
+        verdict: str,
+        authority: Any = None,
+    ) -> str:
+        """Bind a transaction digest to its Sigilith autonomy envelope and delegation chain."""
         import hashlib
         import json
 
@@ -127,6 +133,9 @@ class SQLiteReplayStore:
                 "alpha": round(float(alpha), 6),
                 "permitted_delta": round(float(permitted_delta), 8),
                 "verdict": str(verdict),
+                "root_principal": str(authority.root_principal) if authority is not None else "UNBOUND",
+                "requester_id": str(authority.requester_id) if authority is not None else "UNBOUND",
+                "chain_digest": str(authority.chain_digest) if authority is not None else "0" * 64,
             },
             sort_keys=True,
             separators=(",", ":"),
@@ -143,10 +152,11 @@ class SQLiteReplayStore:
         ledger: Any = None,
         action_id: str | None = None,
         proposed_delta: float = 0.0,
+        authority: Any = None,
     ) -> tuple[bool, str]:
         """
-        Enforce an AutonomyEnvelope via Guardian's single-use replay store and record
-        forensic telemetry in TraceGuard.
+        Enforce an AutonomyEnvelope and VerifiedAuthorityContext via Guardian's single-use
+        replay store and record non-repudiable forensic attribution in TraceGuard.
 
         HOLD_ESCALATE and FAIL_CLOSED consume zero actuation permits and return (False, bound_digest).
         """
@@ -155,6 +165,7 @@ class SQLiteReplayStore:
             alpha=envelope.alpha,
             permitted_delta=envelope.permitted_delta,
             verdict=envelope.verdict.value,
+            authority=authority,
         )
         if envelope.verdict.value not in ("PERMIT_FULL", "PERMIT_ATTENUATED"):
             if ledger is not None:
@@ -163,6 +174,7 @@ class SQLiteReplayStore:
                     permit_digest=bound_digest,
                     proposed_delta=proposed_delta,
                     envelope=envelope,
+                    authority=authority,
                 )
             return False, bound_digest
 
@@ -173,5 +185,6 @@ class SQLiteReplayStore:
                 permit_digest=bound_digest,
                 proposed_delta=proposed_delta,
                 envelope=envelope,
+                authority=authority,
             )
         return accepted, bound_digest

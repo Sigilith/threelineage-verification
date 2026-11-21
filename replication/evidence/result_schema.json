@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0.0",
+  "required_fields": [
+    "replication_id",
+    "timestamp_utc",
+    "evaluator_name",
+    "environment",
+    "source_commit_or_snapshot",
+    "manifest_verification",
+    "checks",
+    "benchmark_comparison",
+    "overall_reproduction_status",
+    "evaluator_notes"
+  ]
+}

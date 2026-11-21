@@ -36,6 +36,16 @@
       "size_bytes": 2061
     },
     {
+      "path": "adapters/ot/README.md",
+      "sha256": "cadaaedacb219b2628b6ed40da39af647ff457642ece4957eca9727331158b66",
+      "size_bytes": 663
+    },
+    {
+      "path": "adapters/ot/boundary.py",
+      "sha256": "1fdeafbab219ce0c592586edecd68cd163a82ea819ac964fc0a3a13ed56d02c0",
+      "size_bytes": 3129
+    },
+    {
       "path": "benchmarks/REPRODUCIBILITY_CHECKLIST.md",
       "sha256": "d11e3934a7e04c0a9acf8b0eb1ba786e59265bb62a376d72dac5d4c0ec1897df",
       "size_bytes": 3731
@@ -156,9 +166,19 @@
       "size_bytes": 4144
     },
     {
+      "path": "core/hardware_trust.py",
+      "sha256": "bf536451aab441cc5ba14ea9c1dd7796c340325616500d5e46f6f8bb654345f1",
+      "size_bytes": 6135
+    },
+    {
+      "path": "core/identity.py",
+      "sha256": "a16de373b4729ce8b1138be3d79bf461157fdf10c5bdfbb48630e39a999c12e4",
+      "size_bytes": 8406
+    },
+    {
       "path": "core/sigilith.py",
-      "sha256": "fbec691e86445d4cf9703e5d6f3e7f2ee9797ef7f8ec58f0540349068182ef44",
-      "size_bytes": 6879
+      "sha256": "7641685e9d957c5d4846f347eaddd740c1aee79ad481f82a6fd9b53fd328d1b1",
+      "size_bytes": 8732
     },
     {
       "path": "core/telemetry_verifier.py",
@@ -167,13 +187,13 @@
     },
     {
       "path": "core/traceguard.py",
-      "sha256": "448a39addb706279cb454c092ea341b4d17131b8b0c4a1fd5962ce38cf4cb824",
-      "size_bytes": 6005
+      "sha256": "eb34c202f7a373592ea4168f308a5a3119f1b239a768a8e61008cd3dc5a90651",
+      "size_bytes": 7250
     },
     {
       "path": "core/transaction_authorization.py",
-      "sha256": "b923224e72bff7237f5410993cf601648234e5cbfbb3ff4ecd3e894bd4dab93f",
-      "size_bytes": 7261
+      "sha256": "9fa83fd123f806bd147990dfb6e97c81f00a4e23020660c4196bdab11a03c59d",
+      "size_bytes": 7835
     },
     {
       "path": "core/verifier_auth.py",
@@ -189,6 +209,11 @@
       "path": "docs/EVIDENCE_RULES.md",
       "sha256": "67db65553655047a6bbe45cc8e7b53ae7205c8600cbbfa13b3b4c05b5feaf84a",
       "size_bytes": 948
+    },
+    {
+      "path": "docs/EXTERNAL_REPLICATION_HANDOFF.md",
+      "sha256": "a33afaaab6813ea09cac6f12fad36445f273342bd406a6407e7a5b74998aa4e1",
+      "size_bytes": 1718
     },
     {
       "path": "docs/RC2.1_BASELINE.md",
@@ -241,6 +266,61 @@
       "size_bytes": 5772
     },
     {
+      "path": "harnesses/ADV-005-DELEGATION-CHAIN.py",
+      "sha256": "f0a3b77fafd644b9a6b5224742857a6f4ba818fa0bf922d6c85ba4656a8b2015",
+      "size_bytes": 6886
+    },
+    {
+      "path": "replication/README.md",
+      "sha256": "59b5a96d870f09bbff2e6d416bed5a08a153955d610885687741d909c73d87fa",
+      "size_bytes": 1328
+    },
+    {
+      "path": "replication/benchmark/expected_results.json",
+      "sha256": "815eb5d2143f36ae60dd0e90b48998052ba6cb2866a68f5188fc0000de1d13c9",
+      "size_bytes": 385
+    },
+    {
+      "path": "replication/benchmark/run_v1_2_0.py",
+      "sha256": "1be46d7c69535f53a9a9e3a861e623fd5f694df151b04c74700052c2fec7f7ba",
+      "size_bytes": 6085
+    },
+    {
+      "path": "replication/environment/requirements.txt",
+      "sha256": "43a510f9edd343c62ca589047ce2fb0737d37a4fb82135020a25cf0587f00d6c",
+      "size_bytes": 35
+    },
+    {
+      "path": "replication/environment/setup.sh",
+      "sha256": "fdf352badb50baf618f199effabd2b37181f1f42a28f43dcff582c3e97487ce3",
+      "size_bytes": 333
+    },
+    {
+      "path": "replication/evidence/expected_checks.json",
+      "sha256": "a2b11d63ce6da65db247893435dd42e33c76745552882f1b88f1651f06dfbc91",
+      "size_bytes": 372
+    },
+    {
+      "path": "replication/evidence/result_schema.json",
+      "sha256": "b0d4f323abadf7cb8274b3330c1960b2938cbd413817c130bb98365f3c494a7b",
+      "size_bytes": 305
+    },
+    {
+      "path": "replication/release_gate/run_replication.sh",
+      "sha256": "9e5f870c3b92c90b5c6d385c8668328b89dae49fe2cbbd610cb9745c009d2fdc",
+      "size_bytes": 4002
+    },
+    {
+      "path": "replication/release_gate/verify_manifest.py",
+      "sha256": "b2dc15cfa911b085cb5a91f9796c9ce0f09806a74763fd0607d6b6b62ec85ade",
+      "size_bytes": 2779
+    },
+    {
+      "path": "replication/reports/TEMPLATE.md",
+      "sha256": "1f0308a8a97ef2d0f144dcfc4c836e8be4848fca1b8da551fe8301ad949c1795",
+      "size_bytes": 1328
+    },
+    {
       "path": "requirements.txt",
       "sha256": "ceeace8d072b469f31ba1a26f2c40677f225d090f76fee996ffe0f7498023c15",
       "size_bytes": 27
@@ -252,13 +332,18 @@
     },
     {
       "path": "scripts/run_release_gate.sh",
-      "sha256": "afd44ae87296a52c8f6e56e6b8fa1922210e74e6cf9d54a1920b9386b9ea2172",
-      "size_bytes": 1160
+      "sha256": "b071b41c77797d36f18a28aaf594202bf05234a8fb5f6da87df44be1fd7bfef2",
+      "size_bytes": 1498
     },
     {
       "path": "tests/conftest.py",
       "sha256": "a625068b8adbea7bf4ab99d2c0dbb6a738497e65093995fc87e2b404e487037a",
       "size_bytes": 364
+    },
+    {
+      "path": "tests/test_delegation_chain.py",
+      "sha256": "a9fe6f53d7c0cb8d8cf056429e3247d263db37bc709b2fde725a57ad04786db8",
+      "size_bytes": 5743
     },
     {
       "path": "tests/test_fix2_tl_find_002.py",
@@ -269,6 +354,21 @@
       "path": "tests/test_fix_tl_find_001.py",
       "sha256": "8ccd75b3283f7f366e8386515130c1fc3762ba8241b2ea1237aa286b57c72baf",
       "size_bytes": 8085
+    },
+    {
+      "path": "tests/test_hardware_trust_interfaces.py",
+      "sha256": "232329df473c77f334f1e8a2318ca14fab4861e5c4399b98667cd3474d01fa01",
+      "size_bytes": 1814
+    },
+    {
+      "path": "tests/test_ot_boundary_scaffold.py",
+      "sha256": "cda9d386646938cfe76202c88c569c5b532e64e29eba85b1d94d1c6a01efa675",
+      "size_bytes": 1567
+    },
+    {
+      "path": "tests/test_ot_protocol_fixtures.py",
+      "sha256": "b26cf04887f53c00d106b4653b79a7dd29e8533c7434f1f3e4245d0c72a21f8d",
+      "size_bytes": 2486
     },
     {
       "path": "tests/test_rc22_crash_boundaries.py",

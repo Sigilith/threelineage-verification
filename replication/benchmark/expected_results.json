@@ -1,0 +1,10 @@
+{
+  "benchmark_version": "v1.2.0",
+  "source_report_sha256": "f680d85f9bc6ee73578079169e52cb523a694306f353a2255dc522e39f535559",
+  "default_runs_per_regime": 10000,
+  "default_seed": 2026,
+  "expected_zero_violation_invariant": true,
+  "expected_zero_escape_invariant": true,
+  "expected_benign_elastic_fail_closed_trips": 0,
+  "expected_benign_elastic_permit_throughput_pct": 100.0
+}

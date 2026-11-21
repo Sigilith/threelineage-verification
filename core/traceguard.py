@@ -1,8 +1,8 @@
 """
 core/traceguard.py: Hash-chained forensic telemetry ledger for attenuated autonomy decisions.
 
-Records (action, permit_digest, H, D, delta, alpha, verdict, executed_delta) in a
-tamper-evident SHA-256 hash chain that fails closed if any historical entry is modified.
+Records (action, permit_digest, H, D, delta, alpha, verdict, executed_delta, identity chain)
+in a tamper-evident SHA-256 hash chain that fails closed if any historical entry is modified.
 """
 
 from __future__ import annotations
@@ -13,6 +13,7 @@ import json
 import os
 from pathlib import Path
 import time
+from typing import Any
 
 from core.sigilith import AutonomyEnvelope
 
@@ -21,7 +22,7 @@ GENESIS_HASH = "0" * 64
 
 @dataclass(frozen=True)
 class TraceGuardRecord:
-    """Single hash-chained audit entry proving bounded autonomy attenuation."""
+    """Single hash-chained audit entry proving bounded autonomy attenuation and delegation lineage."""
 
     seq: int
     timestamp: float
@@ -35,6 +36,10 @@ class TraceGuardRecord:
     proposed_delta: float
     permitted_delta: float
     reason: str
+    root_principal: str
+    requester_id: str
+    delegation_depth: int
+    chain_digest: str
     prev_hash: str
     entry_hash: str
 
@@ -91,6 +96,10 @@ class TraceGuardLedger:
                     proposed_delta=float(unsigned["proposed_delta"]),
                     permitted_delta=float(unsigned["permitted_delta"]),
                     reason=str(unsigned["reason"]),
+                    root_principal=str(unsigned.get("root_principal", "UNBOUND")),
+                    requester_id=str(unsigned.get("requester_id", "UNBOUND")),
+                    delegation_depth=int(unsigned.get("delegation_depth", 0)),
+                    chain_digest=str(unsigned.get("chain_digest", GENESIS_HASH)),
                     prev_hash=str(unsigned["prev_hash"]),
                     entry_hash=str(recorded_hash),
                 )
@@ -114,11 +123,17 @@ class TraceGuardLedger:
         proposed_delta: float,
         envelope: AutonomyEnvelope,
         timestamp: float | None = None,
+        authority: Any = None,
     ) -> TraceGuardRecord:
-        """Append a cryptographically chained autonomy attenuation record."""
+        """Append a cryptographically chained autonomy and delegation attribution record."""
         seq = len(self._records)
         ts = float(timestamp) if timestamp is not None else time.time()
         prev_hash = self.head_hash
+        root_principal = str(authority.root_principal) if authority is not None else "UNBOUND"
+        requester_id = str(authority.requester_id) if authority is not None else "UNBOUND"
+        delegation_depth = int(authority.delegation_depth) if authority is not None else 0
+        chain_digest = str(authority.chain_digest) if authority is not None else GENESIS_HASH
+
         unsigned: dict[str, object] = {
             "seq": seq,
             "timestamp": ts,
@@ -132,6 +147,10 @@ class TraceGuardLedger:
             "proposed_delta": float(proposed_delta),
             "permitted_delta": float(envelope.permitted_delta),
             "reason": envelope.reason,
+            "root_principal": root_principal,
+            "requester_id": requester_id,
+            "delegation_depth": delegation_depth,
+            "chain_digest": chain_digest,
             "prev_hash": prev_hash,
         }
         entry_hash = self._compute_entry_hash(unsigned)
@@ -155,6 +174,10 @@ class TraceGuardLedger:
             proposed_delta=float(proposed_delta),
             permitted_delta=float(envelope.permitted_delta),
             reason=envelope.reason,
+            root_principal=root_principal,
+            requester_id=requester_id,
+            delegation_depth=delegation_depth,
+            chain_digest=chain_digest,
             prev_hash=prev_hash,
             entry_hash=entry_hash,
         )
