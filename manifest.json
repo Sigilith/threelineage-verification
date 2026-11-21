@@ -36,6 +36,16 @@
       "size_bytes": 2061
     },
     {
+      "path": "adapters/ot/README.md",
+      "sha256": "cadaaedacb219b2628b6ed40da39af647ff457642ece4957eca9727331158b66",
+      "size_bytes": 663
+    },
+    {
+      "path": "adapters/ot/boundary.py",
+      "sha256": "1fdeafbab219ce0c592586edecd68cd163a82ea819ac964fc0a3a13ed56d02c0",
+      "size_bytes": 3129
+    },
+    {
       "path": "benchmarks/REPRODUCIBILITY_CHECKLIST.md",
       "sha256": "d11e3934a7e04c0a9acf8b0eb1ba786e59265bb62a376d72dac5d4c0ec1897df",
       "size_bytes": 3731
@@ -99,6 +109,26 @@
       "path": "benchmarks/results/evidence_bundle_20261121T053243Z.md",
       "sha256": "58bfd1d63e7752163807555b2fe0aac57565960be38e54e022021ea3ed338cfb",
       "size_bytes": 2114
+    },
+    {
+      "path": "benchmarks/results/pareto_benchmark_20261121T052646Z.json",
+      "sha256": "c55f5ab0b44bb6a33ab6db20aca7b47340485add82bceefc534fdc932a5af5df",
+      "size_bytes": 3563
+    },
+    {
+      "path": "benchmarks/results/pareto_benchmark_20261121T052646Z.sha256",
+      "sha256": "e9582273fbab716447acf58ce922d5f6bbdb6ee1c3ea5910cf34bb51cb415d7c",
+      "size_bytes": 105
+    },
+    {
+      "path": "benchmarks/results/pareto_benchmark_20261121T053243Z.json",
+      "sha256": "a4afc16ed80f093016aaa11bd85de3d74676e42c505ad99032b9ab682c7d423c",
+      "size_bytes": 3574
+    },
+    {
+      "path": "benchmarks/results/pareto_benchmark_20261121T053243Z.sha256",
+      "sha256": "83f0e144180500b117152ffd258bab16caa07558dd2e2410a0a0ed7f11f7122a",
+      "size_bytes": 105
     },
     {
       "path": "benchmarks/results/pareto_benchmark_20261121T060323Z.json",
@@ -314,6 +344,11 @@
       "path": "tests/test_fix_tl_find_001.py",
       "sha256": "8ccd75b3283f7f366e8386515130c1fc3762ba8241b2ea1237aa286b57c72baf",
       "size_bytes": 8085
+    },
+    {
+      "path": "tests/test_ot_boundary_scaffold.py",
+      "sha256": "cda9d386646938cfe76202c88c569c5b532e64e29eba85b1d94d1c6a01efa675",
+      "size_bytes": 1567
     },
     {
       "path": "tests/test_rc22_crash_boundaries.py",
