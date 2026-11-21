@@ -10,7 +10,7 @@ assignees: ""
 Use this form if you intend to run the published verification package independently. Please open one registration per evaluator or team.
 
 **Evaluation target:** [f5c7f94](https://github.com/Sigilith/threelineage-verification/tree/f5c7f94176f5b852d1a64af19b67e2f2462bfb98)  
-**Archive:** `threelineage-verification-main-f5c7f94.tar.gz)
+**Archive:** `threelineage-verification-main-f5c7f94.tar.gz`
 
 ### Evaluator
 
