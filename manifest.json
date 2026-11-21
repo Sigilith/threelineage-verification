@@ -156,9 +156,14 @@
       "size_bytes": 4144
     },
     {
+      "path": "core/identity.py",
+      "sha256": "a16de373b4729ce8b1138be3d79bf461157fdf10c5bdfbb48630e39a999c12e4",
+      "size_bytes": 8406
+    },
+    {
       "path": "core/sigilith.py",
-      "sha256": "fbec691e86445d4cf9703e5d6f3e7f2ee9797ef7f8ec58f0540349068182ef44",
-      "size_bytes": 6879
+      "sha256": "7641685e9d957c5d4846f347eaddd740c1aee79ad481f82a6fd9b53fd328d1b1",
+      "size_bytes": 8732
     },
     {
       "path": "core/telemetry_verifier.py",
@@ -167,13 +172,13 @@
     },
     {
       "path": "core/traceguard.py",
-      "sha256": "448a39addb706279cb454c092ea341b4d17131b8b0c4a1fd5962ce38cf4cb824",
-      "size_bytes": 6005
+      "sha256": "eb34c202f7a373592ea4168f308a5a3119f1b239a768a8e61008cd3dc5a90651",
+      "size_bytes": 7250
     },
     {
       "path": "core/transaction_authorization.py",
-      "sha256": "b923224e72bff7237f5410993cf601648234e5cbfbb3ff4ecd3e894bd4dab93f",
-      "size_bytes": 7261
+      "sha256": "9fa83fd123f806bd147990dfb6e97c81f00a4e23020660c4196bdab11a03c59d",
+      "size_bytes": 7835
     },
     {
       "path": "core/verifier_auth.py",
@@ -241,6 +246,11 @@
       "size_bytes": 5772
     },
     {
+      "path": "harnesses/ADV-005-DELEGATION-CHAIN.py",
+      "sha256": "f0a3b77fafd644b9a6b5224742857a6f4ba818fa0bf922d6c85ba4656a8b2015",
+      "size_bytes": 6886
+    },
+    {
       "path": "requirements.txt",
       "sha256": "ceeace8d072b469f31ba1a26f2c40677f225d090f76fee996ffe0f7498023c15",
       "size_bytes": 27
@@ -252,13 +262,18 @@
     },
     {
       "path": "scripts/run_release_gate.sh",
-      "sha256": "afd44ae87296a52c8f6e56e6b8fa1922210e74e6cf9d54a1920b9386b9ea2172",
-      "size_bytes": 1160
+      "sha256": "b071b41c77797d36f18a28aaf594202bf05234a8fb5f6da87df44be1fd7bfef2",
+      "size_bytes": 1498
     },
     {
       "path": "tests/conftest.py",
       "sha256": "a625068b8adbea7bf4ab99d2c0dbb6a738497e65093995fc87e2b404e487037a",
       "size_bytes": 364
+    },
+    {
+      "path": "tests/test_delegation_chain.py",
+      "sha256": "a9fe6f53d7c0cb8d8cf056429e3247d263db37bc709b2fde725a57ad04786db8",
+      "size_bytes": 5743
     },
     {
       "path": "tests/test_fix2_tl_find_002.py",

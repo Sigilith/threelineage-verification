@@ -33,3 +33,12 @@ if ! grep -q 'VERDICT: PASS' <<<"$C_OUTPUT"; then
   echo 'RELEASE BLOCKED: ADV-004-ELASTIC-PIPELINE did not produce VERDICT: PASS.' >&2
   exit 1
 fi
+
+TMP_D="$(mktemp -d)"
+trap 'rm -rf "$TMP_A" "$TMP_B" "$TMP_C" "$TMP_D"' EXIT
+D_OUTPUT="$(cd "$TMP_D" && python "$ROOT/harnesses/ADV-005-DELEGATION-CHAIN.py" 2>&1)"
+printf '%s\n' "$D_OUTPUT"
+if ! grep -q 'VERDICT: PASS' <<<"$D_OUTPUT"; then
+  echo 'RELEASE BLOCKED: ADV-005-DELEGATION-CHAIN did not produce VERDICT: PASS.' >&2
+  exit 1
+fi

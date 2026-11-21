@@ -2,7 +2,8 @@
 core/sigilith.py: Continuous autonomy-pressure engine computing alpha = f(H, D, Delta).
 
 Separates inviolable binary AXIOMOS safety perimeters from continuous uncertainty
-attenuation inside the remaining verified headroom envelope.
+attenuation inside the remaining verified headroom envelope, bounded by verified
+delegation authority caps.
 """
 
 from __future__ import annotations
@@ -41,7 +42,7 @@ class SigilithAutonomyEngine:
 
     - AXIOMOS hard bounds and state integrity remain strictly binary (FAIL_CLOSED).
     - Stabilizing actions that restore safety margin receive full authority (alpha = 1.0),
-      attenuated slightly only under high telemetry uncertainty.
+      attenuated slightly only under high telemetry uncertainty or delegation cap.
     - Destabilizing actions approaching the perimeter scale down smoothly via alpha in [0.20, 1.0],
       escalating to HOLD_ESCALATE before crossing the hard AXIOMOS boundary.
     """
@@ -64,6 +65,37 @@ class SigilithAutonomyEngine:
         self.drift_scale = drift_scale
         self.noise_scale = noise_scale
 
+    @staticmethod
+    def _apply_delegation_cap(
+        envelope: AutonomyEnvelope,
+        proposed_delta: float,
+        max_alpha_cap: float,
+    ) -> AutonomyEnvelope:
+        if envelope.verdict not in (GovernanceVerdict.PERMIT_FULL, GovernanceVerdict.PERMIT_ATTENUATED):
+            return envelope
+        if not (0.0 < max_alpha_cap <= 1.0) or not math.isfinite(max_alpha_cap):
+            return AutonomyEnvelope(
+                verdict=GovernanceVerdict.FAIL_CLOSED,
+                alpha=0.0,
+                headroom_pressure=envelope.headroom_pressure,
+                sequence_drift=envelope.sequence_drift,
+                action_direction=envelope.action_direction,
+                permitted_delta=0.0,
+                reason="AXIOMOS_INVALID_DELEGATION_CAP",
+            )
+        if envelope.alpha <= max_alpha_cap:
+            return envelope
+        capped_alpha = round(float(max_alpha_cap), 6)
+        return AutonomyEnvelope(
+            verdict=GovernanceVerdict.PERMIT_ATTENUATED,
+            alpha=capped_alpha,
+            headroom_pressure=envelope.headroom_pressure,
+            sequence_drift=envelope.sequence_drift,
+            action_direction=envelope.action_direction,
+            permitted_delta=proposed_delta * capped_alpha,
+            reason=f"GUARDIAN_DELEGATION_CAPPED_ALPHA_{capped_alpha}",
+        )
+
     def evaluate(
         self,
         current_state: float,
@@ -72,6 +104,7 @@ class SigilithAutonomyEngine:
         sensor_noise: float = 0.0,
         packet_drop: bool = False,
         corrupt_state: bool = False,
+        max_alpha_cap: float = 1.0,
     ) -> AutonomyEnvelope:
         """Compute risk-proportional authority scalar alpha = f(H, D, Delta)."""
         if (
@@ -112,7 +145,7 @@ class SigilithAutonomyEngine:
         if is_stabilizing:
             if sensor_noise > 0.10 or packet_drop:
                 alpha = 0.80
-                return AutonomyEnvelope(
+                raw = AutonomyEnvelope(
                     verdict=GovernanceVerdict.PERMIT_ATTENUATED,
                     alpha=alpha,
                     headroom_pressure=round(H, 6),
@@ -121,7 +154,8 @@ class SigilithAutonomyEngine:
                     permitted_delta=proposed_delta * alpha,
                     reason="GUARDIAN_NOISY_RECOVERY",
                 )
-            return AutonomyEnvelope(
+                return self._apply_delegation_cap(raw, proposed_delta, max_alpha_cap)
+            raw = AutonomyEnvelope(
                 verdict=GovernanceVerdict.PERMIT_FULL,
                 alpha=1.0,
                 headroom_pressure=round(H, 6),
@@ -130,6 +164,7 @@ class SigilithAutonomyEngine:
                 permitted_delta=proposed_delta,
                 reason="GUARDIAN_STABILIZING_PERMIT",
             )
+            return self._apply_delegation_cap(raw, proposed_delta, max_alpha_cap)
 
         drift_ratio = min(1.5, D / self.drift_scale)
         uncertainty = min(1.0, (max(0.0, sensor_noise) / self.noise_scale) + (0.25 if packet_drop else 0.0))
@@ -150,7 +185,7 @@ class SigilithAutonomyEngine:
                 0.20,
                 round(1.0 - (0.75 * H + 0.15 * min(1.0, drift_ratio) + 0.10 * uncertainty), 3),
             )
-            return AutonomyEnvelope(
+            raw = AutonomyEnvelope(
                 verdict=GovernanceVerdict.PERMIT_ATTENUATED,
                 alpha=alpha,
                 headroom_pressure=round(H, 6),
@@ -159,11 +194,12 @@ class SigilithAutonomyEngine:
                 permitted_delta=proposed_delta * alpha,
                 reason=f"GUARDIAN_DERATED_ALPHA_{alpha}",
             )
+            return self._apply_delegation_cap(raw, proposed_delta, max_alpha_cap)
 
         risk_score = (0.45 * H) + (0.40 * min(1.0, drift_ratio)) + (0.15 * uncertainty)
         if risk_score > 0.20:
             alpha = max(0.25, round(1.0 - risk_score, 3))
-            return AutonomyEnvelope(
+            raw = AutonomyEnvelope(
                 verdict=GovernanceVerdict.PERMIT_ATTENUATED,
                 alpha=alpha,
                 headroom_pressure=round(H, 6),
@@ -172,8 +208,9 @@ class SigilithAutonomyEngine:
                 permitted_delta=proposed_delta * alpha,
                 reason=f"GUARDIAN_DERATED_ALPHA_{alpha}",
             )
+            return self._apply_delegation_cap(raw, proposed_delta, max_alpha_cap)
 
-        return AutonomyEnvelope(
+        raw = AutonomyEnvelope(
             verdict=GovernanceVerdict.PERMIT_FULL,
             alpha=1.0,
             headroom_pressure=round(H, 6),
@@ -182,3 +219,4 @@ class SigilithAutonomyEngine:
             permitted_delta=proposed_delta,
             reason="GUARDIAN_FULL_PERMIT",
         )
+        return self._apply_delegation_cap(raw, proposed_delta, max_alpha_cap)
