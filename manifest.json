@@ -367,8 +367,8 @@
     },
     {
       "path": "tests/test_ot_protocol_fixtures.py",
-      "sha256": "b26cf04887f53c00d106b4653b79a7dd29e8533c7434f1f3e4245d0c72a21f8d",
-      "size_bytes": 2486
+      "sha256": "89a5210b0f5689c8bd1d09208bcb89d34202415b7c22bfffdc54b4b5f171cf01",
+      "size_bytes": 4735
     },
     {
       "path": "tests/test_rc22_crash_boundaries.py",
