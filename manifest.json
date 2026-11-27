@@ -337,8 +337,8 @@
     },
     {
       "path": "scripts/build_manifest.py",
-      "sha256": "376a7a02906d3de0d641ff54fb403452abe690d8314b72a338bc86411cac6545",
-      "size_bytes": 2438
+      "sha256": "e008fd3f59818c15a36814e94bc7e9332228ce9fe7446cb8e04bd8812b94a04c",
+      "size_bytes": 3410
     },
     {
       "path": "scripts/run_release_gate.sh",
