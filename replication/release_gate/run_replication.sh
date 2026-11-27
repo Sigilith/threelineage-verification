@@ -8,6 +8,8 @@ export EVALUATOR="${EVALUATOR:-independent-evaluator}"
 export RUNS="${RUNS:-100}"
 export SEED="${SEED:-2026}"
 export OUT_DIR="${OUT_DIR:-$REPO_ROOT/replication_run_output}"
+export SOURCE_COMMIT_OR_SNAPSHOT="${SOURCE_COMMIT_OR_SNAPSHOT:-$(git -C "$REPO_ROOT" rev-parse HEAD 2>/dev/null || printf 'unknown')}"
+export SOURCE_ARCHIVE_SHA256="${SOURCE_ARCHIVE_SHA256:-}"
 
 mkdir -p "$OUT_DIR"
 export CLEAN_TREE="$(mktemp -d)"
@@ -88,7 +90,8 @@ summary = {
         "platform": platform.platform(),
         "machine": platform.machine(),
     },
-    "source_commit_or_snapshot": "clean-room-snapshot-no-git",
+    "source_commit_or_snapshot": os.environ.get("SOURCE_COMMIT_OR_SNAPSHOT") or "not-provided",
+    "source_archive_sha256": os.environ.get("SOURCE_ARCHIVE_SHA256") or None,
     "manifest_verification": manifest_res,
     "checks": checks,
     "benchmark_comparison": bench_data,
