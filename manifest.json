@@ -1,6 +1,11 @@
 {
   "files": [
     {
+      "path": ".github/ISSUE_TEMPLATE/replication-registration.md",
+      "sha256": "6b328b8827432fb4b7b6f2cfcdd882a38eb7fd5c1c641bcb66deccede5bf2a63",
+      "size_bytes": 1602
+    },
+    {
       "path": ".github/workflows/replication-validation.yml",
       "sha256": "331f6f05f632f016d97d569cd83d908f455ba7520fa878cf928d5319148f9ddd",
       "size_bytes": 1281
