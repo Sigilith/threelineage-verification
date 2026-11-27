@@ -19,8 +19,10 @@ def inventory():
         if not path.is_file() or path in {MANIFEST, MANIFEST_SHA}:
             continue
         rel = path.relative_to(ROOT)
-        if any(part in EXCLUDED_DIRS for part in rel.parts):
+        if ".git" in rel.parts:
             continue
+        if any(part in EXCLUDED_DIRS - {".git"} for part in rel.parts):
+            raise SystemExit(f"Forbidden generated directory in package: {rel}")
         if path.suffix in FORBIDDEN_SUFFIXES or path.name in {".env", ".env.local"}:
             raise SystemExit(f"Forbidden generated/secret file in package: {rel}")
         data = path.read_bytes()
