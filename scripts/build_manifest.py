@@ -26,7 +26,7 @@ def inventory():
         data = path.read_bytes()
         entries.append({"path": rel.as_posix(), "size_bytes": len(data), "sha256": hashlib.sha256(data).hexdigest()})
     return {
-        "release": "ThreeLineage-RC2.2-candidate",
+        "release": "ThreeLineage-V1.1.0-candidate",
         "manifest_format": 1,
         "hash_algorithm": "SHA-256",
         "frozen_rc2_1_handover_archive_sha256": BASELINE_SHA256,
