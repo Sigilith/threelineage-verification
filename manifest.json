@@ -267,8 +267,8 @@
     },
     {
       "path": "docs/V1.1.0_CANDIDATE_VERIFICATION_REPORT.md",
-      "sha256": "31e2cd42af8660dcda7ca9578e513aaa3302575b912fa0e2cc065c9536d99583",
-      "size_bytes": 2956
+      "sha256": "e3ce5970c4e1ea0df097175692a4d612b30cffa19cc9e94368e80bb2cd9df4a0",
+      "size_bytes": 3268
     },
     {
       "path": "evidence/contradicted-baseline-ADV-003-B-R1A.log",
