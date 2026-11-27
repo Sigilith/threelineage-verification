@@ -110,7 +110,7 @@ def main() -> int:
     args.output_json.parent.mkdir(parents=True, exist_ok=True)
     raw_out = args.output_json.parent / "pareto_raw_output.json"
 
-    cmd = [sys.executable, str(harness_path), "--runs", str(args.runs), "--seed", str(args.seed)]
+    cmd = [sys.executable, "-m", "benchmarks.pareto_harness", "--runs", str(args.runs), "--seed", str(args.seed)]
     proc = subprocess.run(cmd, cwd=str(ROOT), capture_output=True, text=True)
 
     parsed_data: Any = None
