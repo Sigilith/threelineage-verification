@@ -28,6 +28,9 @@ def _extract_metrics(payload: Any) -> dict[str, Any]:
     benign_elastic_trips: list[int] = []
     benign_elastic_throughput_pct: list[float] = []
     regime_entries = 0
+    benign_elastic_rows = 0
+    benign_elastic_missing_trips = 0
+    benign_elastic_missing_throughput = 0
 
     if isinstance(payload, dict) and isinstance(payload.get("profiles"), dict):
         for _, ctrls in payload["profiles"].items():
@@ -48,17 +51,47 @@ def _extract_metrics(payload: Any) -> dict[str, Any]:
                     if "elastic" in str(ctrl_name).lower() and (
                         "benign" in str(regime_name).lower() or str(regime_name).startswith("A_")
                     ):
-                        if isinstance(safety, dict) and "fail_closed_activations" in safety:
+                        benign_elastic_rows += 1
+                        if isinstance(safety, dict) and safety.get("fail_closed_activations") is not None:
                             benign_elastic_trips.append(int(safety["fail_closed_activations"]))
-                        if "permit_throughput_pct" in metrics and metrics["permit_throughput_pct"] is not None:
-                            benign_elastic_throughput_pct.append(float(metrics["permit_throughput_pct"]))
+                        else:
+                            benign_elastic_missing_trips += 1
+
+                        availability = metrics.get("availability_metrics", {})
+                        if isinstance(availability, dict) and availability.get("permit_throughput_pct") is not None:
+                            benign_elastic_throughput_pct.append(float(availability["permit_throughput_pct"]))
+                        else:
+                            benign_elastic_missing_throughput += 1
 
     return {
         "regime_entries": regime_entries,
         "total_violations": violations,
         "total_escapes": escapes,
+        "benign_elastic_rows": benign_elastic_rows,
+        "benign_elastic_missing_fail_closed_trips": benign_elastic_missing_trips,
+        "benign_elastic_missing_throughput": benign_elastic_missing_throughput,
         "benign_elastic_fail_closed_trips": benign_elastic_trips,
         "benign_elastic_permit_throughput_pct": benign_elastic_throughput_pct,
+    }
+
+
+def _compare_metrics(extracted: dict[str, Any], expected: dict[str, Any], harness_exit_zero: bool) -> dict[str, bool]:
+    """Compare required metrics without allowing missing observations to pass vacuously."""
+    expected_trips = int(expected.get("expected_benign_elastic_fail_closed_trips", 0))
+    expected_thru = float(expected.get("expected_benign_elastic_permit_throughput_pct", 100.0))
+    trips = extracted["benign_elastic_fail_closed_trips"]
+    throughput = extracted["benign_elastic_permit_throughput_pct"]
+    rows = extracted["benign_elastic_rows"]
+    return {
+        "harness_exit_zero": harness_exit_zero,
+        "has_regime_entries": extracted["regime_entries"] > 0,
+        "violations_zero": extracted["total_violations"] == 0 if expected.get("expected_zero_violation_invariant") else True,
+        "escapes_zero": extracted["total_escapes"] == 0 if expected.get("expected_zero_escape_invariant") else True,
+        "benign_elastic_rows_present": rows > 0,
+        "benign_elastic_trip_metrics_complete": extracted["benign_elastic_missing_fail_closed_trips"] == 0 and len(trips) == rows,
+        "benign_elastic_throughput_metrics_complete": extracted["benign_elastic_missing_throughput"] == 0 and len(throughput) == rows,
+        "benign_elastic_trips_match": bool(trips) and all(t == expected_trips for t in trips),
+        "benign_elastic_throughput_match": bool(throughput) and all(abs(p - expected_thru) < 1e-6 for p in throughput),
     }
 
 
@@ -77,7 +110,7 @@ def main() -> int:
     args.output_json.parent.mkdir(parents=True, exist_ok=True)
     raw_out = args.output_json.parent / "pareto_raw_output.json"
 
-    cmd = [sys.executable, str(harness_path), "--runs", str(args.runs), "--seed", str(args.seed)]
+    cmd = [sys.executable, "-m", "benchmarks.pareto_harness", "--runs", str(args.runs), "--seed", str(args.seed)]
     proc = subprocess.run(cmd, cwd=str(ROOT), capture_output=True, text=True)
 
     parsed_data: Any = None
@@ -103,19 +136,7 @@ def main() -> int:
     artifact_sha256 = hashlib.sha256(raw_out.read_bytes()).hexdigest()
 
     extracted = _extract_metrics(parsed_data)
-    expected_trips = int(expected.get("expected_benign_elastic_fail_closed_trips", 0))
-    expected_thru = float(expected.get("expected_benign_elastic_permit_throughput_pct", 100.0))
-
-    comparisons = {
-        "harness_exit_zero": proc.returncode == 0,
-        "has_regime_entries": extracted["regime_entries"] > 0,
-        "violations_zero": extracted["total_violations"] == 0 if expected.get("expected_zero_violation_invariant") else True,
-        "escapes_zero": extracted["total_escapes"] == 0 if expected.get("expected_zero_escape_invariant") else True,
-        "benign_elastic_trips_match": all(t == expected_trips for t in extracted["benign_elastic_fail_closed_trips"]),
-        "benign_elastic_throughput_match": all(
-            abs(p - expected_thru) < 1e-6 for p in extracted["benign_elastic_permit_throughput_pct"]
-        ),
-    }
+    comparisons = _compare_metrics(extracted, expected, proc.returncode == 0)
     matched_expected = all(comparisons.values())
 
     report = {

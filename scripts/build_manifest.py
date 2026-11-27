@@ -42,7 +42,20 @@ def main():
     rendered = json.dumps(expected, indent=2, sort_keys=True) + "\n"
     expected_sha = hashlib.sha256(rendered.encode("utf-8")).hexdigest() + "  manifest.json\n"
     if args.check:
-        if not MANIFEST.exists() or MANIFEST.read_text(encoding="utf-8") != rendered:
+        if not MANIFEST.exists():
+            raise SystemExit("Manifest missing; regenerate with python scripts/build_manifest.py")
+        current_text = MANIFEST.read_text(encoding="utf-8")
+        if current_text != rendered:
+            current_obj = json.loads(current_text)
+            expected_by_path = {entry["path"]: entry for entry in expected["files"]}
+            current_by_path = {entry["path"]: entry for entry in current_obj.get("files", [])}
+            missing = sorted(set(expected_by_path) - set(current_by_path))
+            extra = sorted(set(current_by_path) - set(expected_by_path))
+            changed = sorted(path for path in set(expected_by_path) & set(current_by_path)
+                             if expected_by_path[path] != current_by_path[path])
+            print(json.dumps({"expected_entries": len(expected_by_path), "manifest_entries": len(current_by_path),
+                              "missing_from_manifest": missing, "extra_in_manifest": extra,
+                              "changed_entries": changed}, indent=2))
             raise SystemExit("Manifest mismatch; regenerate with python scripts/build_manifest.py")
         if not MANIFEST_SHA.exists() or MANIFEST_SHA.read_text(encoding="utf-8") != expected_sha:
             raise SystemExit("Manifest SHA-256 mismatch; regenerate with python scripts/build_manifest.py")

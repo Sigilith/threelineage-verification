@@ -1,6 +1,16 @@
 {
   "files": [
     {
+      "path": ".github/ISSUE_TEMPLATE/replication-registration.md",
+      "sha256": "6b328b8827432fb4b7b6f2cfcdd882a38eb7fd5c1c641bcb66deccede5bf2a63",
+      "size_bytes": 1602
+    },
+    {
+      "path": ".github/workflows/replication-validation.yml",
+      "sha256": "331f6f05f632f016d97d569cd83d908f455ba7520fa878cf928d5319148f9ddd",
+      "size_bytes": 1281
+    },
+    {
       "path": ".gitignore",
       "sha256": "a23c604b14ebc2868e581d0e4cabfc983d274aaa6ecd088a3da4628b6b4100f0",
       "size_bytes": 103
@@ -27,8 +37,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "ce2fb2e1e24c896b805ef0178ab5655c28a61816ea43946baeaab0faea237f1c",
-      "size_bytes": 5367
+      "sha256": "95f8866b2c4fbe0410463853923b084af8a4f3c718dec0b3ae4c6e1c0998133e",
+      "size_bytes": 8116
     },
     {
       "path": "SECURITY.md",
@@ -212,8 +222,8 @@
     },
     {
       "path": "docs/EXTERNAL_REPLICATION_HANDOFF.md",
-      "sha256": "a33afaaab6813ea09cac6f12fad36445f273342bd406a6407e7a5b74998aa4e1",
-      "size_bytes": 1718
+      "sha256": "833a0f1bf9bb28796fabe8e779bbdc44f77d197e5985155b9937da40fb9f4021",
+      "size_bytes": 2690
     },
     {
       "path": "docs/RC2.1_BASELINE.md",
@@ -271,9 +281,19 @@
       "size_bytes": 6886
     },
     {
+      "path": "releases/f5c7f94/threelineage-verification-main-f5c7f94.tar.gz",
+      "sha256": "4e4369bdf236e8d103ca3134c94fd3e052be07c675fc6f40203706e18e1a8995",
+      "size_bytes": 76842
+    },
+    {
+      "path": "releases/f5c7f94/threelineage-verification-main-f5c7f94.tar.gz.sha256",
+      "sha256": "8f6f185691e870f4f496f13e66d7526782caad91a8083dcce37ebe8ef3459a2d",
+      "size_bytes": 112
+    },
+    {
       "path": "replication/README.md",
-      "sha256": "59b5a96d870f09bbff2e6d416bed5a08a153955d610885687741d909c73d87fa",
-      "size_bytes": 1328
+      "sha256": "d5c0beaeefb09628d06e22722631fdac496e89e120ef3654b66a33a3518db3c3",
+      "size_bytes": 2056
     },
     {
       "path": "replication/benchmark/expected_results.json",
@@ -282,8 +302,8 @@
     },
     {
       "path": "replication/benchmark/run_v1_2_0.py",
-      "sha256": "1be46d7c69535f53a9a9e3a861e623fd5f694df151b04c74700052c2fec7f7ba",
-      "size_bytes": 6085
+      "sha256": "82916a46b7d95ffd45c00005b24912b9890c9659f9ed3f11c9b4e2c2cdd25b0e",
+      "size_bytes": 7464
     },
     {
       "path": "replication/environment/requirements.txt",
@@ -307,8 +327,8 @@
     },
     {
       "path": "replication/release_gate/run_replication.sh",
-      "sha256": "9e5f870c3b92c90b5c6d385c8668328b89dae49fe2cbbd610cb9745c009d2fdc",
-      "size_bytes": 4002
+      "sha256": "dd7eca254f5f9a2ef00cf64041b7081231bffa6ae5b7f0c33c069dbc31f269b0",
+      "size_bytes": 4306
     },
     {
       "path": "replication/release_gate/verify_manifest.py",
@@ -317,8 +337,8 @@
     },
     {
       "path": "replication/reports/TEMPLATE.md",
-      "sha256": "1f0308a8a97ef2d0f144dcfc4c836e8be4848fca1b8da551fe8301ad949c1795",
-      "size_bytes": 1328
+      "sha256": "7846511e063babbc2a46bf614e71d4bba5113029d8294ba49ccf63796125b937",
+      "size_bytes": 2092
     },
     {
       "path": "requirements.txt",
@@ -327,8 +347,8 @@
     },
     {
       "path": "scripts/build_manifest.py",
-      "sha256": "376a7a02906d3de0d641ff54fb403452abe690d8314b72a338bc86411cac6545",
-      "size_bytes": 2438
+      "sha256": "ff5ab9e08e2bac93ea02c99bb31536acc90527732519982959dbb98d68209dc7",
+      "size_bytes": 3410
     },
     {
       "path": "scripts/run_release_gate.sh",
@@ -379,6 +399,11 @@
       "path": "tests/test_rc22_secrets.py",
       "sha256": "11f09d6a087bdcf4ca09a3b8ba4add1c35f4eec9cbb973dbc7f7d65b13812cde",
       "size_bytes": 771
+    },
+    {
+      "path": "tests/test_replication_benchmark_comparator.py",
+      "sha256": "432c2064c683988a8dfe1e33143c9b74c8a1900cffdccb6588f46450fd369c53",
+      "size_bytes": 2973
     },
     {
       "path": "tests/test_sigilith_elastic_runtime.py",
