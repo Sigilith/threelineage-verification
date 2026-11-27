@@ -252,23 +252,23 @@
     },
     {
       "path": "docs/V1.1.0_AUTONOMY_UNDER_PRESSURE.md",
-      "sha256": "cdf8f5e9dd000ab54e6a9b0a6608bd5aa297fa76636f17f71f20a086c20f6c4e",
-      "size_bytes": 5055
+      "sha256": "25b6ecf86154f566d8c2dd06922b881859b71ea9ca2ec90b35adb6fb565c5565",
+      "size_bytes": 6405
     },
     {
       "path": "docs/V1.1.0_AUTONOMY_UNDER_PRESSURE_GUIDE.md",
-      "sha256": "4bac7c4807cfa4a11b295c5d7a6b1f0a7a9379be8a2215edf663b363374b7e37",
-      "size_bytes": 3687
+      "sha256": "5db5aaf512f5017810388212fdf99b17bc06f9d184d9dde95495df9e76cdaf58",
+      "size_bytes": 4695
     },
     {
       "path": "docs/V1.1.0_CANDIDATE_RELEASE_NOTES.md",
-      "sha256": "9521147b96b4f6c842d9b8d88f26f56395bd658874e7f1be074a82f6a80a2ba6",
-      "size_bytes": 1408
+      "sha256": "282aa715800ae02ab2726704aa9b346e6ab8c8e8f004f17404c43d4d8d73477c",
+      "size_bytes": 2353
     },
     {
       "path": "docs/V1.1.0_CANDIDATE_VERIFICATION_REPORT.md",
-      "sha256": "51b723fe2b868971d703ee9dcb7fd91076e24213fc363b582fbfeddbd9d1721e",
-      "size_bytes": 1480
+      "sha256": "31e2cd42af8660dcda7ca9578e513aaa3302575b912fa0e2cc065c9536d99583",
+      "size_bytes": 2956
     },
     {
       "path": "evidence/contradicted-baseline-ADV-003-B-R1A.log",
