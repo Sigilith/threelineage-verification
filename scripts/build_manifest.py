@@ -58,6 +58,9 @@ def main():
                               "changed_entries": changed}, indent=2))
             raise SystemExit("Manifest mismatch; regenerate with python scripts/build_manifest.py")
         if not MANIFEST_SHA.exists() or MANIFEST_SHA.read_text(encoding="utf-8") != expected_sha:
+            print(f"Expected manifest SHA-256: {expected_sha.strip()}")
+            current_sha = MANIFEST_SHA.read_text(encoding="utf-8").strip() if MANIFEST_SHA.exists() else "<missing>"
+            print(f"Current manifest SHA-256: {current_sha}")
             raise SystemExit("Manifest SHA-256 mismatch; regenerate with python scripts/build_manifest.py")
         print(f"Manifest verified: {len(expected['files'])} files; SHA-256 sidecar verified")
     else:
