@@ -1,0 +1,51 @@
+name: Replication validation
+
+on:
+  push:
+    branches:
+      - fix/replication-benchmark-vacuous-throughput
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  clean-room-replication:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Record source archive digest
+        run: |
+          git archive --format=tar HEAD | sha256sum | awk '{print "SOURCE_ARCHIVE_SHA256=" $1}' >> "$GITHUB_ENV"
+
+      - name: Run clean-room replication gate
+        env:
+          RUNS: '100'
+          SEED: '2026'
+          EVALUATOR: GitHub Actions clean-room runner
+        run: bash replication/release_gate/run_replication.sh
+
+      - name: Upload replication evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: replication-evidence
+          path: replication_run_output/
+          if-no-files-found: warn
