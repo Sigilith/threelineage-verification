@@ -19,14 +19,16 @@ def inventory():
         if not path.is_file() or path in {MANIFEST, MANIFEST_SHA}:
             continue
         rel = path.relative_to(ROOT)
-        if any(part in EXCLUDED_DIRS for part in rel.parts):
+        if ".git" in rel.parts:
+            continue
+        if any(part in EXCLUDED_DIRS - {".git"} for part in rel.parts):
             raise SystemExit(f"Forbidden generated directory in package: {rel}")
         if path.suffix in FORBIDDEN_SUFFIXES or path.name in {".env", ".env.local"}:
             raise SystemExit(f"Forbidden generated/secret file in package: {rel}")
         data = path.read_bytes()
         entries.append({"path": rel.as_posix(), "size_bytes": len(data), "sha256": hashlib.sha256(data).hexdigest()})
     return {
-        "release": "ThreeLineage-RC2.2-candidate",
+        "release": "ThreeLineage-V1.1.0-candidate",
         "manifest_format": 1,
         "hash_algorithm": "SHA-256",
         "frozen_rc2_1_handover_archive_sha256": BASELINE_SHA256,
@@ -58,6 +60,9 @@ def main():
                               "changed_entries": changed}, indent=2))
             raise SystemExit("Manifest mismatch; regenerate with python scripts/build_manifest.py")
         if not MANIFEST_SHA.exists() or MANIFEST_SHA.read_text(encoding="utf-8") != expected_sha:
+            print(f"Expected manifest SHA-256: {expected_sha.strip()}")
+            current_sha = MANIFEST_SHA.read_text(encoding="utf-8").strip() if MANIFEST_SHA.exists() else "<missing>"
+            print(f"Current manifest SHA-256: {current_sha}")
             raise SystemExit("Manifest SHA-256 mismatch; regenerate with python scripts/build_manifest.py")
         print(f"Manifest verified: {len(expected['files'])} files; SHA-256 sidecar verified")
     else:

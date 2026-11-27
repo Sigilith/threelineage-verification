@@ -11,6 +11,11 @@
       "size_bytes": 1281
     },
     {
+      "path": ".github/workflows/v1-1-0-release-gate.yml",
+      "sha256": "b7e442fbbe6883139b274bdce767573bb92f2ef0d23e69b417026862ff8606b3",
+      "size_bytes": 687
+    },
+    {
       "path": ".gitignore",
       "sha256": "a23c604b14ebc2868e581d0e4cabfc983d274aaa6ecd088a3da4628b6b4100f0",
       "size_bytes": 103
@@ -246,6 +251,26 @@
       "size_bytes": 5341
     },
     {
+      "path": "docs/V1.1.0_AUTONOMY_UNDER_PRESSURE.md",
+      "sha256": "25b6ecf86154f566d8c2dd06922b881859b71ea9ca2ec90b35adb6fb565c5565",
+      "size_bytes": 6405
+    },
+    {
+      "path": "docs/V1.1.0_AUTONOMY_UNDER_PRESSURE_GUIDE.md",
+      "sha256": "5db5aaf512f5017810388212fdf99b17bc06f9d184d9dde95495df9e76cdaf58",
+      "size_bytes": 4695
+    },
+    {
+      "path": "docs/V1.1.0_CANDIDATE_RELEASE_NOTES.md",
+      "sha256": "282aa715800ae02ab2726704aa9b346e6ab8c8e8f004f17404c43d4d8d73477c",
+      "size_bytes": 2353
+    },
+    {
+      "path": "docs/V1.1.0_CANDIDATE_VERIFICATION_REPORT.md",
+      "sha256": "4f19701b27c80aadf1269a4de552523ee177829583e0d5c14dbd53e253dadf17",
+      "size_bytes": 3268
+    },
+    {
       "path": "evidence/contradicted-baseline-ADV-003-B-R1A.log",
       "sha256": "304dd6a193cf3312d735d079a1c9afa830c72a545a9f33b5e0676a54c227a4a8",
       "size_bytes": 1269
@@ -347,8 +372,8 @@
     },
     {
       "path": "scripts/build_manifest.py",
-      "sha256": "ff5ab9e08e2bac93ea02c99bb31536acc90527732519982959dbb98d68209dc7",
-      "size_bytes": 3410
+      "sha256": "ac7ac7eccfc8ee278753d42c3728ffb32cd60a46f89debc71589f9daea135167",
+      "size_bytes": 3726
     },
     {
       "path": "scripts/run_release_gate.sh",
@@ -359,6 +384,11 @@
       "path": "tests/conftest.py",
       "sha256": "a625068b8adbea7bf4ab99d2c0dbb6a738497e65093995fc87e2b404e487037a",
       "size_bytes": 364
+    },
+    {
+      "path": "tests/test_autonomy_under_pressure_scenario.py",
+      "sha256": "b2f2dedadcefcd25a2308215a8fab7b9c9c59d360c9b0219bf0f1966a1c76ded",
+      "size_bytes": 6899
     },
     {
       "path": "tests/test_delegation_chain.py",
@@ -419,5 +449,5 @@
   "frozen_rc2_1_handover_archive_sha256": "32a9c5f8746d9416ea9184f417b479d206f012e37d46b91b1bc6b2ca77708011",
   "hash_algorithm": "SHA-256",
   "manifest_format": 1,
-  "release": "ThreeLineage-RC2.2-candidate"
+  "release": "ThreeLineage-V1.1.0-candidate"
 }
