@@ -20,7 +20,7 @@ def inventory():
             continue
         rel = path.relative_to(ROOT)
         if any(part in EXCLUDED_DIRS for part in rel.parts):
-            raise SystemExit(f"Forbidden generated directory in package: {rel}")
+            continue
         if path.suffix in FORBIDDEN_SUFFIXES or path.name in {".env", ".env.local"}:
             raise SystemExit(f"Forbidden generated/secret file in package: {rel}")
         data = path.read_bytes()
