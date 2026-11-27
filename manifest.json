@@ -16,14 +16,44 @@
       "size_bytes": 1664
     },
     {
-      "path": "adapters/ot/boundary.py",
-      "sha256": "1fdeafbab219ce0c592586edecd68cd163a82ea819ac964fc0a3a13ed56d02c0",
-      "size_bytes": 3129
+      "path": "CITATION.cff",
+      "sha256": "8570b82445b54672f9b02420cd725f390fd37d546760f3014a538c42ab546d0c",
+      "size_bytes": 805
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "size_bytes": 11358
+    },
+    {
+      "path": "PACKAGE-SCOPE.md",
+      "sha256": "3662081e4e4da075381f234bb46aabf8dc39341cfdc2082294ad8236da70d4a5",
+      "size_bytes": 2874
+    },
+    {
+      "path": "README.md",
+      "sha256": "95f8866b2c4fbe0410463853923b084af8a4f3c718dec0b3ae4c6e1c0998133e",
+      "size_bytes": 8116
+    },
+    {
+      "path": "SECURITY.md",
+      "sha256": "db6d93b7b46d5b130f9f8799ff61cf38aef4cfe90901acbdd1c227fb7a833061",
+      "size_bytes": 2061
     },
     {
       "path": "adapters/ot/README.md",
       "sha256": "cadaaedacb219b2628b6ed40da39af647ff457642ece4957eca9727331158b66",
       "size_bytes": 663
+    },
+    {
+      "path": "adapters/ot/boundary.py",
+      "sha256": "1fdeafbab219ce0c592586edecd68cd163a82ea819ac964fc0a3a13ed56d02c0",
+      "size_bytes": 3129
+    },
+    {
+      "path": "benchmarks/REPRODUCIBILITY_CHECKLIST.md",
+      "sha256": "d11e3934a7e04c0a9acf8b0eb1ba786e59265bb62a376d72dac5d4c0ec1897df",
+      "size_bytes": 3731
     },
     {
       "path": "benchmarks/__init__.py",
@@ -69,11 +99,6 @@
       "path": "benchmarks/regimes/single_node.py",
       "sha256": "693fa9cea8acfee527f12b3516c305f81979307eff1e11841948d36a3cb67527",
       "size_bytes": 2541
-    },
-    {
-      "path": "benchmarks/REPRODUCIBILITY_CHECKLIST.md",
-      "sha256": "d11e3934a7e04c0a9acf8b0eb1ba786e59265bb62a376d72dac5d4c0ec1897df",
-      "size_bytes": 3731
     },
     {
       "path": "benchmarks/results/.gitkeep",
@@ -134,11 +159,6 @@
       "path": "benchmarks/types.py",
       "sha256": "daac422c99136a7531a22d3dfbce799b2b931d177b7e7631e831568aae5a57ae",
       "size_bytes": 2845
-    },
-    {
-      "path": "CITATION.cff",
-      "sha256": "8570b82445b54672f9b02420cd725f390fd37d546760f3014a538c42ab546d0c",
-      "size_bytes": 805
     },
     {
       "path": "core/__init__.py",
@@ -256,19 +276,9 @@
       "size_bytes": 6886
     },
     {
-      "path": "LICENSE",
-      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
-      "size_bytes": 11358
-    },
-    {
-      "path": "PACKAGE-SCOPE.md",
-      "sha256": "3662081e4e4da075381f234bb46aabf8dc39341cfdc2082294ad8236da70d4a5",
-      "size_bytes": 2874
-    },
-    {
-      "path": "README.md",
-      "sha256": "95f8866b2c4fbe0410463853923b084af8a4f3c718dec0b3ae4c6e1c0998133e",
-      "size_bytes": 8116
+      "path": "replication/README.md",
+      "sha256": "d5c0beaeefb09628d06e22722631fdac496e89e120ef3654b66a33a3518db3c3",
+      "size_bytes": 2056
     },
     {
       "path": "replication/benchmark/expected_results.json",
@@ -301,11 +311,6 @@
       "size_bytes": 305
     },
     {
-      "path": "replication/README.md",
-      "sha256": "d5c0beaeefb09628d06e22722631fdac496e89e120ef3654b66a33a3518db3c3",
-      "size_bytes": 2056
-    },
-    {
       "path": "replication/release_gate/run_replication.sh",
       "sha256": "dd7eca254f5f9a2ef00cf64041b7081231bffa6ae5b7f0c33c069dbc31f269b0",
       "size_bytes": 4306
@@ -336,11 +341,6 @@
       "size_bytes": 1498
     },
     {
-      "path": "SECURITY.md",
-      "sha256": "db6d93b7b46d5b130f9f8799ff61cf38aef4cfe90901acbdd1c227fb7a833061",
-      "size_bytes": 2061
-    },
-    {
       "path": "tests/conftest.py",
       "sha256": "a625068b8adbea7bf4ab99d2c0dbb6a738497e65093995fc87e2b404e487037a",
       "size_bytes": 364
@@ -351,14 +351,14 @@
       "size_bytes": 5743
     },
     {
-      "path": "tests/test_fix_tl_find_001.py",
-      "sha256": "8ccd75b3283f7f366e8386515130c1fc3762ba8241b2ea1237aa286b57c72baf",
-      "size_bytes": 8085
-    },
-    {
       "path": "tests/test_fix2_tl_find_002.py",
       "sha256": "932b72ac7d533a44c5f8ef26c658173ba205548bef870ab79f4b577c88acab1a",
       "size_bytes": 10239
+    },
+    {
+      "path": "tests/test_fix_tl_find_001.py",
+      "sha256": "8ccd75b3283f7f366e8386515130c1fc3762ba8241b2ea1237aa286b57c72baf",
+      "size_bytes": 8085
     },
     {
       "path": "tests/test_hardware_trust_interfaces.py",
