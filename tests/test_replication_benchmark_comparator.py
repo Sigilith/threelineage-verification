@@ -47,7 +47,9 @@ class BenchmarkComparatorTests(unittest.TestCase):
         self.assertEqual(extracted["benign_elastic_missing_fail_closed_trips"], 1)
 
     def test_missing_metrics_cannot_pass_comparison(self):
-        extracted = MODULE._extract_metrics(self._payload({}))
+        payload = self._payload({})
+        del payload["profiles"]["Single_Node"]["Elastic_V2"]["A_Benign_Volatility"]["safety_metrics"]["fail_closed_activations"]
+        extracted = MODULE._extract_metrics(payload)
         expected = {
             "expected_benign_elastic_fail_closed_trips": 0,
             "expected_benign_elastic_permit_throughput_pct": 100.0,
