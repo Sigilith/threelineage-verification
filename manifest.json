@@ -337,7 +337,7 @@
     },
     {
       "path": "scripts/build_manifest.py",
-      "sha256": "e008fd3f59818c15a36814e94bc7e9332228ce9fe7446cb8e04bd8812b94a04c",
+      "sha256": "ff5ab9e08e2bac93ea02c99bb31536acc90527732519982959dbb98d68209dc7",
       "size_bytes": 3410
     },
     {
